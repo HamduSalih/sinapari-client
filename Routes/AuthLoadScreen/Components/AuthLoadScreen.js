@@ -46,7 +46,9 @@ render(){
 		 longitudeDelta: 0.045
 	}
 		return(
-			<ImageBackground style={}>
+			<ImageBackground style={
+				styles.container
+			}>
 
 			</ImageBackground>
 		);
