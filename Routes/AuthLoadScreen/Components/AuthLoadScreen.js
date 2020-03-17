@@ -1,16 +1,14 @@
 import React from "react";
-import {View, Text, YellowBox} from "react-native";
+import {View, Text, ImageBackground, StyleSheet} from "react-native";
 import { Container }  from "native-base";
 import { Actions } from 'react-native-router-flux';
-import MapContainer from "./MapContainer";
 import Constants from 'expo-constants';
-import RenderJobs from './RenderJobs';
 import BottomTab from '../../../Navigtions/BottomTabContainer';
 
 const sinaLogo = require("../../../assets/img/sinapari_blue.png");
 const truckMarker = require("../../../assets/img/truck_marker.png");
 
-class DriverHome extends React.Component{
+class AuthloadScreen extends React.Component{
 	constructor(props){
 		super(props);
 		if(this.props.from === 'bidProcess'){
@@ -48,28 +46,19 @@ render(){
 		 longitudeDelta: 0.045
 	}
 		return(
-			<Container>
-				
-					<View style={{flex:1}}>
-					{/**this.props.region.latitude &&
-						<MapContainer 
-							region={this.props.region}
-							allJobs={this.props.allJobs}
-							userJobs={this.props.userJobs}							
-						/> */
-					}
-					{
-						this.props.allJobs && this.props.userJobs && this.props.userJobs.status == 'inactive' && 
-						<RenderJobs
-							allJobs={this.props.allJobs}
-						/>
-					}
-						<BottomTab />
-					</View>
-			</Container>
+			<ImageBackground style={}>
+
+			</ImageBackground>
 		);
 
 	}
 }
 
-export default DriverHome;
+export default AuthloadScreen;
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center'
+	}
+})

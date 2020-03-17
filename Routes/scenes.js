@@ -1,14 +1,13 @@
 import React from "react";
 import { StyleSheet } from 'react-native';
 import { Actions, Scene, ActionConst } from "react-native-router-flux";
-
+import AuthLoadScreenContainer from './AuthLoadScreen/Containers/AuthLoadScreenContainer'
 
 
 
 const scenes = Actions.create(
 	<Scene key="root">
-		<Scene key="authLoad" hideNavBar component={AuthLoadScreen} title="AuthLoad"  initial/>
-		
+		<Scene key="authLoad" hideNavBar component={AuthLoadScreenContainer} title="AuthLoad"  initial/>
 	</Scene>
 
 );
