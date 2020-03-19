@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, TextInput, StyleSheet } from 'react-native'
+import { View, ScrollView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { Button } from 'native-base'
 
 export default class Login extends Component{
@@ -21,13 +21,13 @@ export default class Login extends Component{
                         placeholder='Password'
                         style={styles.textInput}
                     />
-                    <View style={styles.buttonView}>
-                        <Button style={styles.Button}>
-                            <Text>Login</Text>
-                        </Button>
-                        <Button style={styles.Button}>
-                            <Text>Sign In</Text>
-                        </Button>
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.userButton}>
+                            <Text style={styles.buttonText}>Login</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.userButton}>
+                            <Text style={styles.buttonText}>Sign In</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -56,12 +56,20 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 20
     },
-    buttonView:{
-        flexDirection: 'row',
-        justifyContent: 'space-around'
+    userButton: {
+        backgroundColor: '#141d48',
+        padding: 15,
+        borderRadius: 5,
+        width: '45%'
     },
-    Button:{
-        width: '45%',
-        alignSelf: 'flex-start'
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%'
+    },
+    buttonText:{
+        textAlign: 'center',
+        fontSize: 15,
+        color: 'white'
     }
 })
