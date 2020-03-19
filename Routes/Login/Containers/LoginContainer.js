@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import Home from "../Components/Home";
+import Login from "../Components/Login";
 import {
 	
-} from "../Modules/Home";
+} from "../Modules/Login";
 //states from modules home.js
 const mapStateToProps = (state) => ({
 	
@@ -11,4 +11,4 @@ const mapStateToProps = (state) => ({
 const mapActionCreators = {
 	
 };
-export default connect(mapStateToProps, mapActionCreators)(Home);
+export default connect(mapStateToProps, mapActionCreators)(Login);

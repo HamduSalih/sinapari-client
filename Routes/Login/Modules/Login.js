@@ -60,7 +60,7 @@ const initialState = {
   
 };
 
-export function HomeReducer (state = initialState, action){
+export function LoginReducer (state = initialState, action){
 	const handler = ACTION_HANDLERS[action.type];
 
 	return handler ? handler(state, action) : state;

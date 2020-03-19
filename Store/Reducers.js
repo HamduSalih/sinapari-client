@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import { AuthLoadScreenReducer as authLoad } from '../Routes/AuthLoadScreen/Modules/AuthLoadScreen'
-import { HomeReducer as home } from '../Routes/Home/Modules/Home'
+import { LoginReducer as login } from '../Routes/Login/Modules/Login'
 
 
 export const makeRootReducer = () => {
 	return combineReducers({
 		authLoad,
-		home
+		login
 	});
 }
 
