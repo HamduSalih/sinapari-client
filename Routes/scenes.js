@@ -8,7 +8,7 @@ import LoginContainer from './Login/Containers/LoginContainer'
 const scenes = Actions.create(
 	<Scene key="root">
 		<Scene key="authLoad" hideNavBar component={AuthLoadScreenContainer} title="AuthLoad"  initial/>
-		<Scene key="Login" type={ActionConst.RESET} component={LoginContainer} title="Login" />
+		<Scene key="login" type={ActionConst.RESET} component={LoginContainer} title="Login" />
 	</Scene>
 
 );

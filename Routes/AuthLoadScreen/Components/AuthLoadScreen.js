@@ -17,10 +17,9 @@ class AuthloadScreen extends React.Component{
 	}
 
 	componentDidMount(){
-		setTimeout(
-			Actions.login(),
-			5000
-		)
+		setTimeout(() => {
+			Actions.login()
+		}, 5000);
   	}
 
   componentDidUpdate(prevProps, prevState){
