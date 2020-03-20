@@ -11,7 +11,7 @@ export default class Login extends Component{
 
     _navigate = (nextScreen) => {
         let params = this.state
-        Actions.nextScreen({userInfo: params})
+        Actions[nextScreen].call({userInfo: params})
     }
 
     render(){
@@ -44,8 +44,8 @@ export default class Login extends Component{
                             <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.userButton}
-                            onPress={this._navigate.bind(this, register)}>
-                            <Text style={styles.buttonText}>Sign In</Text>
+                            onPress={this._navigate.bind(this, 'register')}>
+                            <Text style={styles.buttonText}>Register</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
