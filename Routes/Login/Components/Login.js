@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
 import { View, ScrollView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { Button } from 'native-base'
+import { Actions } from 'react-native-router-flux'
 
 export default class Login extends Component{
+
+    state = {
+
+    }
+
+    _navigate = (nextScreen) => {
+        let params = this.state
+        Actions.nextScreen({userInfo: params})
+    }
+
     render(){
         return(
             <View style={{
@@ -15,17 +26,25 @@ export default class Login extends Component{
                     <TextInput
                         placeholder='Input your username'
                         style={styles.textInput}
+                        onChangeText={(username)=> this.setState({username})}
+                        value={this.state.username}
+                        autoCapitalize='none'
                     />
                     <Text style={styles.labels}>Password</Text>
                     <TextInput
                         placeholder='Password'
                         style={styles.textInput}
+                        onChangeText={(password)=> this.setState({password})}
+                        value={this.state.password}
+                        autoCapitalize='none'
+                        secureTextEntry
                     />
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.userButton}>
                             <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.userButton}>
+                        <TouchableOpacity style={styles.userButton}
+                            onPress={this._navigate.bind(this, register)}>
                             <Text style={styles.buttonText}>Sign In</Text>
                         </TouchableOpacity>
                     </View>
