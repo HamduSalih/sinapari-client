@@ -6,12 +6,12 @@ import { Actions } from 'react-native-router-flux'
 export default class Login extends Component{
 
     state = {
-
+        picture: null
     }
 
-    _navigate = (nextScreen) => {
+    _navigate = () => {
         let params = this.state
-        Actions[nextScreen].call({userInfo: params})
+        Actions.register({userInfo: params})
     }
 
     render(){

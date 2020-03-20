@@ -4,6 +4,7 @@ import { Actions, Scene, ActionConst } from "react-native-router-flux";
 import AuthLoadScreenContainer from './AuthLoadScreen/Containers/AuthLoadScreenContainer'
 import LoginContainer from './Login/Containers/LoginContainer'
 import RegisterContainer from './Register/Containers/RegisterContainer'
+import RegProcessContainer from './RegProcess/Containers/RegProcessContainer'
 
 
 const scenes = Actions.create(
@@ -11,6 +12,7 @@ const scenes = Actions.create(
 		<Scene key="authLoad" hideNavBar component={AuthLoadScreenContainer} title="AuthLoad"  initial/>
 		<Scene key="login" type={ActionConst.RESET} component={LoginContainer} title="Login" />
 		<Scene key="register" component={RegisterContainer} title="Register" />
+		<Scene key='regprocess' hideNavBar type={ActionConst.RESET} component={RegProcessContainer} title="RegProcess" />
 	</Scene>
 
 );

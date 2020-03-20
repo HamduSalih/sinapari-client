@@ -1,14 +1,58 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, ScrollView, Text, TextInput, Image, TouchableOpacity } from 'react-native'
 import { Button } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import styles from './ScrollContainerStyles'
+import * as ImagePicker from 'expo-image-picker';
+import * as firebase from 'firebase';
 
 export default class ScrollContainer extends Component{
-    state={
-        picture: null
+    constructor(props){
+        super(props);
+        this.state = this.props.userInfo
     }
     
+    _pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+          this.setState({ picture: result.uri });
+        }
+      };
+
+
+      _upload = async(img_src) => {
+            const response = await fetch(img_src);
+            const blob = await response.blob();
+            var ref = firebase.storage().ref().child(this.state.id_number.toString() + '.jpg');
+            //ref.getMetadata().then(function(metadata){
+            //   console.log(metadata);
+            //});
+            //ref.getDownloadURL().then(function(url){
+            //  console.log(url);
+            //})
+            if(ref.put(blob)){
+                let param = this.state;
+                Actions.regprocess({userData:param});
+            };
+            ref.put(blob)
+            .then(()=>{
+                let param = this.state;
+                Actions.regprocess({userData:param});
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+            //console.log(this.state);
+        }
+
     render(){
         let { picture } = this.state;   
         return(
@@ -57,7 +101,7 @@ export default class ScrollContainer extends Component{
                         style={styles.textInput}
                         placeholder='Input your firm name'
                         onChangeText={(client)=> this.setState({client})}
-                        value={this.state.username}
+                        value={this.state.client}
                     />
 
                     <Text style={styles.labels}>Identification Number</Text>
@@ -78,7 +122,9 @@ export default class ScrollContainer extends Component{
                     />
                 </View>
                 <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.userButton}>
+                        <TouchableOpacity style={styles.userButton}
+                            onPress={this._upload.bind(this, this.state.picture)}
+                        >
                             <Text style={styles.buttonText}>Register</Text>
                         </TouchableOpacity>
                     </View>

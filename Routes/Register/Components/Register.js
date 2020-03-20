@@ -5,12 +5,16 @@ import { Actions } from 'react-native-router-flux'
 import ScrollContainer from './ScrollContainer'
 
 export default class Register extends Component{
-
-    state = {
-
+    constructor(props) {
+        super(props);
+        this.state = this.props.userInfo
     }
 
     _navigate = (nextScreen) => {
+    }
+
+    componentDidMount(){
+        console.log(this.state)
     }
 
     render(){
@@ -19,7 +23,9 @@ export default class Register extends Component{
                 flex:1,
                 justifyContent: 'center'
             }}>
-                <ScrollContainer />
+                <ScrollContainer 
+                    userInfo={this.state}
+                />
             </View>
         )
     }
