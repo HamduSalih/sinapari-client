@@ -1,3 +1,3 @@
 export default {
-	REGISTER_USER:"REGISTER_USER"
+	GET_USER_DATA:'GET_USER_DATA'
 };

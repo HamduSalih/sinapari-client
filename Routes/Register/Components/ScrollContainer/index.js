@@ -32,25 +32,29 @@ export default class ScrollContainer extends Component{
             const response = await fetch(img_src);
             const blob = await response.blob();
             var ref = firebase.storage().ref().child(this.state.id_number.toString() + '.jpg');
+            var params = this.state
             //ref.getMetadata().then(function(metadata){
             //   console.log(metadata);
             //});
             //ref.getDownloadURL().then(function(url){
             //  console.log(url);
             //})
-            if(ref.put(blob)){
-                let param = this.state;
-                Actions.regprocess({userData:param});
-            };
+            /**
+             * 
             ref.put(blob)
             .then(()=>{
-                let param = this.state;
                 Actions.regprocess({userData:param});
             })
             .catch((err)=>{
                 console.log(err)
             })
-            //console.log(this.state);
+            
+             */ 
+            if(ref.put(blob)){
+                console.log(params);
+                Actions.regprocess({userInfo: params});
+            };
+            //console.log(param);
         }
 
     render(){

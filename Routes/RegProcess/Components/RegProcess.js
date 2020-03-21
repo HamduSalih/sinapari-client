@@ -31,29 +31,26 @@ const sinabg = require('../../../assets/img/sina-bg.jpg')
 const sinalogo = require('../../../assets/img/sinalogo.jpg')
 
 export default class RegProcess extends React.Component{
-    static navigationOptions = {
-        headerShown: false
-    }
 
     constructor(props) {
         super(props);
         // Don't call this.setState() here!
-        const { navigation } = this.props;
-        let old_state = this.props.userData;
-        this.state = old_state;
+        this.state = this.props.userInfo
     }
+
     //first 
     _firstRegister = async() => {
         const userData = this.state;
         
-        database.collection('clients').doc(userData.id_number).set(userData)
+        console.log(this.state)
+
+        database.collection('clients').add(userData)
         .then(async() => {
             await AsyncStorage.setItem('isLoggedIn', '1');
             await AsyncStorage.setItem('id_number', userData.id_number);
         })
         .then(()=>{
-            //Actions.driverhome();
-            console.log('success')
+            this.props.getUserData(userData.id_number);
         })
         .catch((err)=>{
             console.log(err)

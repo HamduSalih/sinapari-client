@@ -1,14 +1,14 @@
 import { connect } from "react-redux";
 import RegProcess from '../Components/RegProcess'
 import {
-	registerUser
+	getUserData
 } from "../Modules/RegProcess";
 //states from modules home.js
 const mapStateToProps = (state) => ({
-	UserData: state.regprocess.UserData || {}
+	userData: state.regprocess.userData || {}
 });
 
 const mapActionCreators = {
-	registerUser
+	getUserData
 };
 export default connect(mapStateToProps, mapActionCreators)(RegProcess);

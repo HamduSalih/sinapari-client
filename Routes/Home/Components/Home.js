@@ -2,7 +2,6 @@ import React from "react";
 import {View, Text, YellowBox} from "react-native";
 import { Container }  from "native-base";
 import { Actions } from 'react-native-router-flux';
-import MapContainer from "./MapContainer";
 import Constants from 'expo-constants';
 
 const sinaLogo = require("../../../assets/img/sinapari_blue.png");

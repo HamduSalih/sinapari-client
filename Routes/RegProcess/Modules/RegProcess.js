@@ -33,7 +33,7 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
 //THESE ARE ACTIONS CONSTANTS THEY SHOULD BE CALLED 
 //IN actionConstants.js
 const { 
-  REGISTER_USER
+	GET_USER_DATA
 	  } = constants;
 
 
@@ -44,29 +44,42 @@ const LONGITUDE_DELTA = 0.035;
 //---------------
 //Actions
 //---------------
-export function registerUser(payload){
-	return{
-		type:REGISTER_USER,
-		payload	
+export function getUserData(id_number){
+	var collections = database.collection('clients');
+	var userData = {}
+	return (dispatch)=>{
+		collections.where('id_number', '==', id_number)
+		.get()
+		.then((querySnapshot)=>{
+			querySnapshot.forEach((doc)=>{
+				userData = doc.data()
+			})
+		})
+		.then(()=>{
+			dispatch({
+				type: GET_USER_DATA,
+				payload: userData
+			})
+		})
 	}
 }
 
 //--------------------
 //Action Handlers
 //--------------------
-function handleRegisterUser(state, action){
+function handleGetUserData(state, action){
 	return update(state, {
-		UserData:{
-		  $set:action.payload
+		userData:{
+			$set: action.payload
 		}
 	})
 }
 
-const ACTION_HANDLERS = {
-	REGISTER_USER:handleRegisterUser  
+const ACTION_HANDLERS = { 
+	GET_USER_DATA:handleGetUserData
 }
 const initialState = {
-  UserData:{}
+  userData:{}
 };
 
 export function RegProcessReducer (state = initialState, action){
