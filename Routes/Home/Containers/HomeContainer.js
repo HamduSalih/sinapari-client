@@ -5,7 +5,7 @@ import {
 } from "../Modules/Home";
 //states from modules home.js
 const mapStateToProps = (state) => ({
-	
+	userData: state.regprocess.userData || {}
 });
 
 const mapActionCreators = {

@@ -52,6 +52,9 @@ export default class RegProcess extends React.Component{
         .then(()=>{
             this.props.getUserData(userData.id_number);
         })
+        .then(()=>{
+            Actions.home();
+        })
         .catch((err)=>{
             console.log(err)
         });
