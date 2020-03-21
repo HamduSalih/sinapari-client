@@ -202,7 +202,7 @@ const ACTION_HANDLERS = {
   DRIVER_BIDS:handleGetDriverBids,
 }
 const initialState = {
-  
+  allJobs: {}
 };
 
 export function AuthLoadScreenReducer (state = initialState, action){

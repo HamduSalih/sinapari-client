@@ -11,13 +11,7 @@ const truckMarker = require("../../../assets/img/truck_marker.png");
 class Home extends React.Component{
 	constructor(props){
 		super(props);
-		if(this.props.from === 'bidProcess'){
-			this.state.bids = this.props.bids
-		} else {
-			this.state.bids = this.props.allBids
 		}
-		this.state.driverLicense = this.props.userId
-	}
 
 
 render(){

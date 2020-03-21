@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, ImageBackground, StyleSheet, Image} from "react-native";
+import {View, Text, ImageBackground, StyleSheet, Image, AsyncStorage} from "react-native";
 import { Container }  from "native-base";
 import { Actions } from 'react-native-router-flux';
 import Constants from 'expo-constants';
@@ -18,10 +18,21 @@ class AuthloadScreen extends React.Component{
 
 	componentDidMount(){
 		setTimeout(() => {
-			Actions.login()
+			this._bootstrapAsync();
 		}, 5000);
   	}
 
+	_bootstrapAsync = async () => {
+        const userToken = await AsyncStorage.getItem('isLoggedIn');
+        const driverLicense = await AsyncStorage.getItem('id_number');
+        if(userToken !== '1'){
+            Actions.login();
+        } else{
+            Actions.home();
+        }
+    }
+	
+	
   componentDidUpdate(prevProps, prevState){
   } 
 
