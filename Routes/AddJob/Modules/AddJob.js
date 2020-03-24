@@ -60,7 +60,7 @@ const initialState = {
   
 };
 
-export function RegisterReducer (state = initialState, action){
+export function AddJobReducer (state = initialState, action){
 	const handler = ACTION_HANDLERS[action.type];
 
 	return handler ? handler(state, action) : state;

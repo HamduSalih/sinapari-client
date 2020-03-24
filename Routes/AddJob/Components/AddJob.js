@@ -4,10 +4,9 @@ import { Button } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import ScrollContainer from './ScrollContainer'
 
-export default class Register extends Component{
+export default class AddJob extends Component{
     constructor(props) {
         super(props);
-        this.state = this.props.userInfo
     }
 
     _navigate = (nextScreen) => {
@@ -23,8 +22,7 @@ export default class Register extends Component{
                 flex:1,
                 justifyContent: 'center'
             }}>
-                <ScrollContainer 
-                    userInfo={this.state}
+                <ScrollContainer
                 />
             </View>
         )

@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import Register from "../Components/Register";
+import AddJob from "../Components/AddJob";
 import {
 	
-} from "../Modules/Register";
+} from "../Modules/AddJob";
 //states from modules home.js
 const mapStateToProps = (state) => ({
 	
@@ -11,4 +11,4 @@ const mapStateToProps = (state) => ({
 const mapActionCreators = {
 	
 };
-export default connect(mapStateToProps, mapActionCreators)(Register);
+export default connect(mapStateToProps, mapActionCreators)(AddJob);

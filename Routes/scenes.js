@@ -6,6 +6,7 @@ import LoginContainer from './Login/Containers/LoginContainer'
 import RegisterContainer from './Register/Containers/RegisterContainer'
 import RegProcessContainer from './RegProcess/Containers/RegProcessContainer'
 import HomeContainer from './Home/Containers/HomeContainer'
+import AddJobContainer from './AddJob/Containers/AddJobContainer'
 
 
 const scenes = Actions.create(
@@ -15,6 +16,7 @@ const scenes = Actions.create(
 		<Scene key="register" component={RegisterContainer} title="Register" />
 		<Scene key='regprocess' hideNavBar type={ActionConst.RESET} component={RegProcessContainer} title="RegProcess" />
 		<Scene key="home" type={ActionConst.RESET} component={HomeContainer} title="Home" />
+		<Scene key="addJob" component={AddJobContainer} title="Create Job" />
 	</Scene>
 
 );
