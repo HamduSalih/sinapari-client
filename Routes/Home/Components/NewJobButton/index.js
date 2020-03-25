@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'native-base';
 import { MaterialIcons } from '@expo/vector-icons'
 import styles from './NewJobButtonStyles'
+import { Actions } from 'react-native-router-flux';
 
 const NewJobButton = () => {
     return(
@@ -10,7 +11,7 @@ const NewJobButton = () => {
             size={50} 
             name={'add-circle-outline'} 
             color={'#141d48'}
-            onPress = {()=>console.log('working')}
+            onPress = {() => Actions.addJob()}
         />
     )
 }

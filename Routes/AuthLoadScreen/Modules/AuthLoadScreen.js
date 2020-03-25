@@ -74,39 +74,17 @@ export function getDriverLocation(userId){
 
 export function getUserData(userId){	
 	return (dispatch)=>{
-		var driverUserData = database.collection('drivers').doc(userId.toString());
-		driverUserData.get()
-		.then((doc)=>{
-			if(doc.exists){
+		var clientUserData = database.collection('clients');
+		clientUserData.where('id_number', '==', userId)
+		.get()
+		.then((querySnapshot)=>{
+			querySnapshot.forEach((doc)=>{
 				dispatch({
 					type:GET_USER_DATA,
 					payload: doc.data()	
 				})
-			}
-		});
-
-		var driverAccountsData = database.collection('accounts').doc(userId.toString());
-		var driverJobsData = database.collection('jobsInfo').doc(userId.toString());
-
-		driverAccountsData.get()
-		.then((doc)=>{
-			if(doc.exists){
-				dispatch({
-					type:GET_USER_ACCOUNTS,
-					payload: doc.data()	
-				})
-			}
-		});
-
-		driverJobsData.get()
-		.then((doc)=>{
-			if(doc.exists){
-				dispatch({
-					type:GET_USER_JOBS,
-					payload: doc.data()	
-				})
-			}
-		});
+			})
+		  })
 	}	
 }
 
