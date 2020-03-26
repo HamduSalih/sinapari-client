@@ -2,7 +2,8 @@ import React from 'react'
 
 const styles = {
     inputField: {
-        paddingVertical: 5
+        paddingVertical: 5,
+        //paddingHorizontal: 15
     }
 }
 

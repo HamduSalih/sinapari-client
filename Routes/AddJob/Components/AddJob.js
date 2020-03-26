@@ -3,6 +3,7 @@ import { View, ScrollView, Text, TextInput, StyleSheet, TouchableOpacity } from 
 import { Button } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import ScrollContainer from './ScrollContainer'
+import GooglePlacesInput from './ScrollContainer/GooglePlacesInput'
 
 export default class AddJob extends Component{
     constructor(props) {
@@ -23,6 +24,7 @@ export default class AddJob extends Component{
                 justifyContent: 'center'
             }}>
                 <ScrollContainer
+                   
                 />
             </View>
         )

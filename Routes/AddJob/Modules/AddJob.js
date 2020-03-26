@@ -35,7 +35,10 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
 //THESE ARE ACTIONS CONSTANTS THEY SHOULD BE CALLED 
 //IN actionConstants.js
 const { 
-	
+  TOGGLE_SEARCH_RESULT,
+  GET_SELECTED_ADDRESS,
+  GET_DISTANCE_MATRIX
+  
 	  } = constants;
 
 
@@ -46,18 +49,121 @@ const LONGITUDE_DELTA = 0.035;
 //---------------
 //Actions
 //---------------
+export function getInputType(payload){
+  return{
+    type:TOGGLE_SEARCH_RESULT,
+    payload
+  }
+}
 
+export function getSelectedAddress(payload, resType){
+  
+  return(dispatch, store)=>{
+    if(store().home.selectedLoadAddress === true){
+      dispatch({
+        type:GET_SELECTED_ADDRESS,
+        payload,
+        resType
+      })
+      //get the distance and time
+      if(store().home.selectedLoadPoint && store().home.selectedDropPoint){
+        request.get('https://maps.googleapis.com/maps/api/distancematrix/json')
+        .query({
+          origins:store().home.selectedLoadAddress.latitude + ',' + store().home.selectedLoadAddress.longitude,
+          destinations:store().home.selectedDropAddress.latitude + ',' + store().home.selectedDropAddress.longitude,
+          mode:'driving',
+          key:'AIzaSyCspx_yMJwX4bTjLXTUHebo9TwYxTaLa6E'
+        })
+        .finish((error, res)=>{
+          dispatch({
+            type:GET_DISTANCE_MATRIX,
+            payload:res.body
+          })
+        })
+      }
+    }else{
+      dispatch({
+        type:GET_SELECTED_ADDRESS,
+        payload,
+        resType
+      })
+    }
+  }
+}
 
 //--------------------
 //Action Handlers
 //--------------------
+function handleGetInputType(state, action){
+  if(action.payload === 'loadPoint'){
+    return update(state, {
+       resultTypes:{
+         pickUp:{
+           $set:true,
+         },
+         dropOff:{
+           $set:false,
+         }
+       },
+       selectedLoadPoint:{
+         $set:true
+       }
+    });
+  }
 
+  if(action.payload === 'dropPoint'){
+    return update(state, {
+       resultTypes:{
+         pickUp:{
+           $set:false,
+         },
+         dropOff:{
+           $set:true,
+         }
+       },
+       selectedDropPoint:{
+         $set:true
+       }
+    });
+  }
+}
+
+function handleGetSelectedAddress(state, action){
+  if (action.resType === 'loadPoint'){
+    return update(state, {
+      selectedLoadAddress:{
+        $set:action.payload
+      }
+    })
+  }
+  if (action.resType === 'dropPoint'){
+    return update(state, {
+      selectedDropAddress:{
+        $set:action.payload
+      }
+    })
+  }
+}
+
+function handleGetDistanceMatrix(state, action){
+  return update(state, {
+    distanceMatrix:{
+      $set:action.payload
+    }
+  })
+}
 
 const ACTION_HANDLERS = {
-  
+  TOGGLE_SEARCH_RESULT:handleGetInputType,
+  GET_SELECTED_ADDRESS:handleGetSelectedAddress,
+  GET_DISTANCE_MATRIX:handleGetDistanceMatrix
 }
 const initialState = {
-  
+  resultTypes:{},
+  selectedLoadAddress:{},
+  selectedDropAddress:{},
+  selectedLoadPoint:{},
+  selectedDropPoint:{},
 };
 
 export function AddJobReducer (state = initialState, action){
