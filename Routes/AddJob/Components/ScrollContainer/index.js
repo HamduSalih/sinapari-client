@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux'
 import styles from './ScrollContainerStyles'
 import * as ImagePicker from 'expo-image-picker';
 import * as firebase from 'firebase';
+import GooglePlacesInput from './GooglePlacesInput'
 
 export default class ScrollContainer extends Component{
     constructor(props){
@@ -15,6 +16,7 @@ export default class ScrollContainer extends Component{
         return(
             <ScrollView contentContainerStyle>
                 <View style={styles.formContainer}>
+                    <GooglePlacesInput />
                     <Text style={styles.labels}>Fullname</Text>
                     <TextInput
                         style={styles.textInput}
