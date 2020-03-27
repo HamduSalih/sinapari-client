@@ -24,7 +24,8 @@ export default class AddJob extends Component{
                 justifyContent: 'center'
             }}>
                 <ScrollContainer
-                   
+                   getInputType={this.props.getInputType}
+                   getSelectedAddress={this.props.getSelectedAddress}
                 />
             </View>
         )

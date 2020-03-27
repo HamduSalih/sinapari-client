@@ -22,7 +22,7 @@ const GooglePlacesInput = ({getSelectedAddress,getInputType}) => {
                     autoFocus={false}
                     returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
                     keyboardAppearance={'light'} // Can be left out for default keyboardAppearance https://facebook.github.io/react-native/docs/textinput.html#keyboardappearance
-                    listViewDisplayed='auto'    // true/false/undefined
+                    listViewDisplayed={false}    // true/false/undefined
                     fetchDetails={true}
                     renderDescription={row => row.description} // custom description render
                     onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
@@ -72,7 +72,7 @@ const GooglePlacesInput = ({getSelectedAddress,getInputType}) => {
                     autoFocus={false}
                     returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
                     keyboardAppearance={'light'} // Can be left out for default keyboardAppearance https://facebook.github.io/react-native/docs/textinput.html#keyboardappearance
-                    listViewDisplayed='auto'    // true/false/undefined
+                    listViewDisplayed={false}    // true/false/undefined
                     fetchDetails={true}
                     renderDescription={row => row.description} // custom description render
                     onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true

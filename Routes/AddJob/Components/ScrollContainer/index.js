@@ -14,12 +14,14 @@ export default class ScrollContainer extends Component{
 
     render(){ 
         return(
-            <ScrollView contentContainerStyle>
+            <ScrollView keyboardShouldPersistTaps='always' contentContainerStyle>
                 <View style={styles.formContainer}>
-                    <GooglePlacesInput 
-                        getInputType={this.props.getInputType}
-                        getSelectedAddress={this.props.getSelectedAddress}
-                    />
+                    <View>
+                        <GooglePlacesInput 
+                            getInputType={this.props.getInputType}
+                            getSelectedAddress={this.props.getSelectedAddress}
+                        />
+                    </View>
                     <Text style={styles.labels}>Fullname</Text>
                     <TextInput
                         style={styles.textInput}
