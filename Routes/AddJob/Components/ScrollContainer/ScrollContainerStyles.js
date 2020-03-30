@@ -23,6 +23,13 @@ const styles = {
         borderRadius: 5,
         marginBottom: 20
     },
+    pickerInput:{
+        borderColor: '#141d48',
+        borderWidth: 1,
+        padding: 0,
+        borderRadius: 5,
+        marginBottom: 20
+    },
     userButton: {
         backgroundColor: '#141d48',
         padding: 15,

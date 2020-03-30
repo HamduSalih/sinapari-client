@@ -14,7 +14,7 @@ export default class AddJob extends Component{
     }
 
     componentDidMount(){
-        console.log(this.state)
+        //console.log(this.state)
     }
 
     render(){
@@ -26,6 +26,10 @@ export default class AddJob extends Component{
                 <ScrollContainer
                    getInputType={this.props.getInputType}
                    getSelectedAddress={this.props.getSelectedAddress}
+                   userData={this.props.userData}
+                   distanceMatrix={this.props.distanceMatrix}
+                   selectedLoadAddress={this.props.selectedLoadAddress}
+                   selectedDropAddress={this.props.selectedDropAddress}
                 />
             </View>
         )

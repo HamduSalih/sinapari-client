@@ -59,18 +59,18 @@ export function getInputType(payload){
 export function getSelectedAddress(payload, resType){
   
   return(dispatch, store)=>{
-    if(store().home.selectedLoadAddress === true){
+    if(store().addJob.selectedLoadPoint === true){
       dispatch({
         type:GET_SELECTED_ADDRESS,
         payload,
         resType
       })
       //get the distance and time
-      if(store().home.selectedLoadPoint && store().home.selectedDropPoint){
+      if(store().addJob.selectedLoadPoint && store().addJob.selectedDropPoint){
         request.get('https://maps.googleapis.com/maps/api/distancematrix/json')
         .query({
-          origins:store().home.selectedLoadAddress.latitude + ',' + store().home.selectedLoadAddress.longitude,
-          destinations:store().home.selectedDropAddress.latitude + ',' + store().home.selectedDropAddress.longitude,
+          origins:store().addJob.selectedLoadAddress.latitude + ',' + store().addJob.selectedLoadAddress.longitude,
+          destinations:store().addJob.selectedDropAddress.latitude + ',' + store().addJob.selectedDropAddress.longitude,
           mode:'driving',
           key:'AIzaSyCspx_yMJwX4bTjLXTUHebo9TwYxTaLa6E'
         })
@@ -164,6 +164,7 @@ const initialState = {
   selectedDropAddress:{},
   selectedLoadPoint:{},
   selectedDropPoint:{},
+  distanceMatrix:{}
 };
 
 export function AddJobReducer (state = initialState, action){

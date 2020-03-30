@@ -9,8 +9,8 @@ const mapStateToProps = (state) => ({
     resultTypes: state.addJob.resultTypes || {},
     selectedLoadAddress: state.addJob.selectedLoadAddress || {},
     selectedDropAddress: state.addJob.selectedDropAddress || {},
-    selectedLoadPoint: state.addJob.selectedLoadPoint || {},
-    selectedDropPoint: state.selectedDropPoint || {}
+    distanceMatrix: state.addJob.distanceMatrix || {},
+    userData: state.regprocess.userData
 });
 
 const mapActionCreators = {

@@ -1,68 +1,149 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, TextInput, Image, TouchableOpacity } from 'react-native'
+import { View, ScrollView, Text, TextInput, Image, TouchableOpacity,
+    Picker } from 'react-native'
 import { Button } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import styles from './ScrollContainerStyles'
 import * as ImagePicker from 'expo-image-picker';
 import * as firebase from 'firebase';
 import GooglePlacesInput from './GooglePlacesInput'
+import * as Random from 'expo-random';
 
 export default class ScrollContainer extends Component{
     constructor(props){
         super(props);
     }
 
+    state={
+        accessories: null,
+        client: this.props.userData.client,
+        clientId: this.props.userData.id_number,
+        distanceMatrix: null,
+        dropOffTime: null,
+        dropOffAddress: null,
+        dropOffLat: null,
+        dropOffLong: null,
+        goodsDescription: null,
+        jobId: null,
+        pickUpTime: null,
+        pickUpAddress: null,
+        pickUpLat: null,
+        pickUpLong: null,
+        status: 'not live',
+        trailerType: null,
+        vehicleType: null,
+        weight: null
+    }
+
+    componentDidUpdate(){
+        //console.log(this.state)
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.distanceMatrix !== this.props.distanceMatrix){
+            this.setState({
+                distanceMatrix: nextProps.distanceMatrix
+            })
+        }
+        
+        if(nextProps.selectedDropAddress !== this.props.selectedDropAddress){
+            this.setState({
+                dropOffAddress: nextProps.selectedDropAddress.address,
+                dropOffLat: nextProps.selectedDropAddress.latitude,
+                dropOffLong: nextProps.selectedDropAddress.longitude
+            })
+        }
+
+        if(nextProps.selectedLoadAddress !== this.props.selectedLoadAddress){
+            this.setState({
+                pickUpAddress: nextProps.selectedLoadAddress.address,
+                pickUpLat: nextProps.selectedLoadAddress.latitude,
+                pickUpLong: nextProps.selectedLoadAddress.longitude
+            })
+        }
+    }
+
     render(){ 
         return(
             <ScrollView keyboardShouldPersistTaps='always' contentContainerStyle>
                 <View style={styles.formContainer}>
-                    <View>
+                    <View style={{paddingBottom: 20}}>
                         <GooglePlacesInput 
                             getInputType={this.props.getInputType}
                             getSelectedAddress={this.props.getSelectedAddress}
                         />
                     </View>
-                    <Text style={styles.labels}>Fullname</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        placeholder='Your fullname'
-                    />
+                    <Text style={styles.labels}>Vehicle Type</Text>
+                    
+                    <View style={styles.pickerInput}>
+                        <Picker
+                            selectedValue={this.state.vehicleType}
+                            onValueChange={(itemValue, itemIndex) =>
+                                this.setState({vehicleType: itemValue})
+                            }>
+                            <Picker.Item label="Trailer Type" value="" />
+                            <Picker.Item label="Flatbed" value="flatbed" />
+                            <Picker.Item label="Transit" value="transit" />
+                            <Picker.Item label="Box-cargo" value="box-cargo" />
+                        </Picker>
+                    </View>
+                    <Text style={styles.labels}>Trailer Type</Text>
 
-                    <Text style={styles.labels}>Age</Text>
+                    <View style={styles.pickerInput}>
+                        <Picker
+                            selectedValue={this.state.trailerType}
+                            onValueChange={(itemValue, itemIndex) =>
+                                this.setState({trailerType: itemValue})
+                            }>
+                            <Picker.Item label="Trailer Length" value="" />
+                            <Picker.Item label="20ft" value="20ft" />
+                            <Picker.Item label="40ft" value="40ft" />
+                        </Picker>
+                    </View>
+
+                    <Text style={styles.labels}>Goods Description</Text>
                     <TextInput
+                        multiline={true}
                         style={styles.textInput}
-                        placeholder='Age'
-                        keyboardType='number-pad'
-                        
+                        placeholder='Describe goods'
+                        onChangeText={(goodsDescription)=> this.setState({goodsDescription})}
                     />
                 </View>
 
                 <View style={styles.formContainer2}>
-                    <Text style={styles.labels}>Client Firm</Text>
+                    <Text style={styles.labels}>Weight(Tonnes)</Text>
                     <TextInput
                         style={styles.textInput}
-                        placeholder='Input your firm name'
-                        
+                        keyboardType='number-pad'
+                        placeholder='Weight of goods'
+                        onChangeText={(weight)=> this.setState({weight})}
                     />
 
-                    <Text style={styles.labels}>Identification Number</Text>
+                    <Text style={styles.labels}>Accessories</Text>
                     <TextInput
                         style={styles.textInput}
-                        keyboardType='number-pad'
-                        placeholder='Input your id number'
-                        
+                        placeholder='Example: pallets or tampoline'
+                        onChangeText={(accessories)=> this.setState({accessories})}
                     />
-                    <Text style={styles.labels}>Phone Number</Text>
+
+                    <Text style={styles.labels}>Loading Time</Text>
                     <TextInput
                         style={styles.textInput}
-                        keyboardType='number-pad'
-                        placeholder='Input your phone number'
+                        placeholder='mm/dd/yyyy hh:mm'
+                        onChangeText={(pickUpTime)=> this.setState({pickUpTime})}
+                    />
+                    <Text style={styles.labels}>Drop-Off Time</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='mm/dd/yyyy hh:mm'
+                        onChangeText={(dropOffTime)=> this.setState({dropOffTime})}
                     />
                 </View>
                 <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.userButton}
+                            onPress={()=>console.log(this.state)}
                         >
-                            <Text style={styles.buttonText}>Register</Text>
+                            <Text style={styles.buttonText}>Add Job</Text>
                         </TouchableOpacity>
                     </View>
             </ScrollView>
