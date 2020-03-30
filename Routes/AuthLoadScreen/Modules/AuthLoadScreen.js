@@ -38,7 +38,8 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
 //THESE ARE ACTIONS CONSTANTS THEY SHOULD BE CALLED 
 //IN actionConstants.js
 const { 
-	GET_USER_DATA
+	GET_USER_DATA,
+	GET_USER_JOBS
 	  } = constants;
 
 
@@ -102,7 +103,7 @@ export function getAllJobs(){
 		})
 		.then(()=>{
 			dispatch({
-				type:GET_ALL_JOBS,
+				type:GET_USER_JOBS,
 				payload: jobsObject	
 			})
 		})
@@ -175,8 +176,7 @@ const ACTION_HANDLERS = {
   GET_DRIVER_LOCATION:handleGetDriverLocation,
   GET_USER_DATA:handleGetUserData,
   GET_USER_ACCOUNTS:handleGetUserAccount,
-  GET_USER_JOBS:handleGetUserJobs,
-  GET_ALL_JOBS:handleGetAllJobs,
+  GET_USER_JOBS:handleGetAllJobs,
   DRIVER_BIDS:handleGetDriverBids,
 }
 const initialState = {

@@ -37,7 +37,8 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
 const { 
   TOGGLE_SEARCH_RESULT,
   GET_SELECTED_ADDRESS,
-  GET_DISTANCE_MATRIX
+  GET_DISTANCE_MATRIX,
+  GET_USER_JOBS
   
 	  } = constants;
 
@@ -93,10 +94,11 @@ export function getSelectedAddress(payload, resType){
 
 export function addJob(jobDetails){
   var collections = database.collection('jobs');
+  var allJobs = []
   const receivedData = {
     accessories: null,
         client: jobDetails.client,
-        clientId: jobDetails.id_number,
+        clientId: jobDetails.clientId,
         distance: jobDetails.distanceMatrix.rows[0].elements[0].distance.text,
         pickUp:{
           time: jobDetails.pickUpTime,
@@ -118,6 +120,27 @@ export function addJob(jobDetails){
         weight: jobDetails.weight
   }
   //add data to database and dispatch jobs array to store
+
+  return(dispatch)=>{
+    collections.add(receivedData)
+    .then(()=>{
+      collections.where('client', '==', jobDetails.client)
+      .where('clientId', '==', jobDetails.clientId)
+      .get()
+      .then((querySnapshot)=>{
+        querySnapshot.forEach((doc)=>{
+          allJobs.push(doc.data());
+        })
+      })
+      .then(()=>{
+        dispatch({
+          type: GET_USER_JOBS,
+          payload: allJobs
+        })
+      })
+    })
+    
+  }
 }
 
 //--------------------
@@ -182,10 +205,19 @@ function handleGetDistanceMatrix(state, action){
   })
 }
 
+function handleGetAllJobs(state, action){
+  return update(state, {
+    allJobs:{
+      $set:action.payload
+    }
+  })
+}
+
 const ACTION_HANDLERS = {
   TOGGLE_SEARCH_RESULT:handleGetInputType,
   GET_SELECTED_ADDRESS:handleGetSelectedAddress,
-  GET_DISTANCE_MATRIX:handleGetDistanceMatrix
+  GET_DISTANCE_MATRIX:handleGetDistanceMatrix,
+  GET_USER_JOBS:handleGetAllJobs
 }
 const initialState = {
   resultTypes:{},
@@ -193,7 +225,8 @@ const initialState = {
   selectedDropAddress:{},
   selectedLoadPoint:{},
   selectedDropPoint:{},
-  distanceMatrix:{}
+  distanceMatrix:{},
+  allJobs:{}
 };
 
 export function AddJobReducer (state = initialState, action){

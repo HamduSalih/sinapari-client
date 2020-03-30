@@ -70,9 +70,12 @@ export default class ScrollContainer extends Component{
         }
     }
 
+    //handles adding job to database
     _addJobEvent = (parameter) => {
         const loadBoolean = this.props.selectedLoadPoint //variable to receive load point boolean
         const dropBoolean = this.props.selectedDropPoint //variable to receive drop point boolean
+        
+        //convert time to timestamp
         function toTimestamp(strDate){
             var datum = Date.parse(strDate);
             return datum/1000;
@@ -85,13 +88,17 @@ export default class ScrollContainer extends Component{
             pickUpTime: loadTime,
             dropOffTime: dropTime
         })
+
+
         //error handling to check if fields are not empty
         if(loadBoolean == true && dropBoolean == true){
             if(this.state.dropOffTime !== null ||
                 this.state.dropOffTime !== null ||
                 this.state.goodsDescription !== null ||
                 this.state.weight !== null){
-                    console.log(this.state)
+                    this.props.addJob(this.state),
+                    alert('Job Added Successfully'),
+                    Actions.home();
             }
         }else{
             alert('Please make sure all fields are completed')

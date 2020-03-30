@@ -2,7 +2,8 @@ import { connect } from "react-redux";
 import AddJob from "../Components/AddJob";
 import {
     getInputType,
-    getSelectedAddress
+    getSelectedAddress,
+    addJob
 } from "../Modules/AddJob";
 //states from modules home.js
 const mapStateToProps = (state) => ({
@@ -17,6 +18,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionCreators = {
     getInputType,
-    getSelectedAddress
+    getSelectedAddress,
+    addJob
 };
 export default connect(mapStateToProps, mapActionCreators)(AddJob);

@@ -32,6 +32,7 @@ export default class AddJob extends Component{
                    selectedDropAddress={this.props.selectedDropAddress}
                    selectedLoadPoint={this.props.selectedLoadPoint}
                    selectedDropPoint={this.props.selectedDropPoint}
+                   addJob={this.props.addJob}
                 />
             </View>
         )
