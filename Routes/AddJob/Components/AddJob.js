@@ -30,6 +30,8 @@ export default class AddJob extends Component{
                    distanceMatrix={this.props.distanceMatrix}
                    selectedLoadAddress={this.props.selectedLoadAddress}
                    selectedDropAddress={this.props.selectedDropAddress}
+                   selectedLoadPoint={this.props.selectedLoadPoint}
+                   selectedDropPoint={this.props.selectedDropPoint}
                 />
             </View>
         )

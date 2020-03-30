@@ -35,8 +35,15 @@ export default class ScrollContainer extends Component{
         weight: null
     }
 
-    componentDidUpdate(){
-        //console.log(this.state)
+    async componentDidMount(){
+        const randomBytes = await Random.getRandomBytesAsync(9);
+        var i = 0;
+        var jobId = '';
+        while(i < randomBytes.length){
+            jobId = jobId + randomBytes[i];
+            i = i + 1;
+        }
+        this.setState({jobId: jobId});
     }
 
     componentWillReceiveProps(nextProps){
@@ -60,6 +67,21 @@ export default class ScrollContainer extends Component{
                 pickUpLat: nextProps.selectedLoadAddress.latitude,
                 pickUpLong: nextProps.selectedLoadAddress.longitude
             })
+        }
+    }
+
+    _addJobEvent = (parameter) => {
+        const loadBoolean = this.props.selectedLoadPoint //variable to receive load point boolean
+        const dropBoolean = this.props.selectedDropPoint //variable to receive drop point boolean
+
+        //error handling to check if fields are not empty
+        if(loadBoolean !== '' || dropBoolean !== ''){
+            if(this.state.dropOffTime !== null ||
+                this.state.dropOffTime !== null ||
+                this.state.goodsDescription !== null ||
+                this.state.weight !== null){
+                    
+            }
         }
     }
 
@@ -141,7 +163,7 @@ export default class ScrollContainer extends Component{
                 </View>
                 <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.userButton}
-                            onPress={()=>console.log(this.state)}
+                            onPress={()=>this._addJobEvent.bind(this, this.state)}
                         >
                             <Text style={styles.buttonText}>Add Job</Text>
                         </TouchableOpacity>
