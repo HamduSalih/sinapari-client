@@ -11,8 +11,8 @@ const mapStateToProps = (state) => ({
     selectedDropAddress: state.addJob.selectedDropAddress || {},
     distanceMatrix: state.addJob.distanceMatrix || {},
     userData: state.regprocess.userData,
-    selectedLoadPoint: state.addJob.selectedLoadPoint || '',
-    selectedDropPoint: state.addJob.selectedDropPoint || ''
+    selectedLoadPoint: state.addJob.selectedLoadPoint || {},
+    selectedDropPoint: state.addJob.selectedDropPoint || {}
 });
 
 const mapActionCreators = {

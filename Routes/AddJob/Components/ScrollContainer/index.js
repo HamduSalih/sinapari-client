@@ -19,16 +19,16 @@ export default class ScrollContainer extends Component{
         client: this.props.userData.client,
         clientId: this.props.userData.id_number,
         distanceMatrix: null,
-        dropOffTime: null,
-        dropOffAddress: null,
-        dropOffLat: null,
-        dropOffLong: null,
+            dropOffTime: null,
+            dropOffAddress: null,
+            dropOffLat: null,
+            dropOffLong: null,      
         goodsDescription: null,
         jobId: null,
-        pickUpTime: null,
-        pickUpAddress: null,
-        pickUpLat: null,
-        pickUpLong: null,
+            pickUpTime: null,
+            pickUpAddress: null,
+            pickUpLat: null,
+            pickUpLong: null,
         status: 'not live',
         trailerType: null,
         vehicleType: null,
@@ -55,17 +55,17 @@ export default class ScrollContainer extends Component{
         
         if(nextProps.selectedDropAddress !== this.props.selectedDropAddress){
             this.setState({
-                dropOffAddress: nextProps.selectedDropAddress.address,
-                dropOffLat: nextProps.selectedDropAddress.latitude,
-                dropOffLong: nextProps.selectedDropAddress.longitude
+                    dropOffAddress: nextProps.selectedDropAddress.address,
+                    dropOffLat: nextProps.selectedDropAddress.latitude,
+                    dropOffLong: nextProps.selectedDropAddress.longitude
             })
         }
 
         if(nextProps.selectedLoadAddress !== this.props.selectedLoadAddress){
             this.setState({
-                pickUpAddress: nextProps.selectedLoadAddress.address,
-                pickUpLat: nextProps.selectedLoadAddress.latitude,
-                pickUpLong: nextProps.selectedLoadAddress.longitude
+                    pickUpAddress: nextProps.selectedLoadAddress.address,
+                    pickUpLat: nextProps.selectedLoadAddress.latitude,
+                    pickUpLong: nextProps.selectedLoadAddress.longitude
             })
         }
     }
@@ -80,20 +80,21 @@ export default class ScrollContainer extends Component{
         
         let loadTime = toTimestamp(this.state.pickUpTime)
         let dropTime = toTimestamp(this.state.dropOffTime)
-
+   
         this.setState({
             pickUpTime: loadTime,
             dropOffTime: dropTime
         })
-
         //error handling to check if fields are not empty
-        if(loadBoolean !== '' || dropBoolean !== ''){
+        if(loadBoolean == true && dropBoolean == true){
             if(this.state.dropOffTime !== null ||
                 this.state.dropOffTime !== null ||
                 this.state.goodsDescription !== null ||
                 this.state.weight !== null){
                     console.log(this.state)
             }
+        }else{
+            alert('Please make sure all fields are completed')
         }
     }
 
@@ -175,7 +176,7 @@ export default class ScrollContainer extends Component{
                 </View>
                 <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.userButton}
-                            onPress={()=>this._addJobEvent.bind(this, this.state)}
+                            onPress={this._addJobEvent.bind(this, this.state)}
                         >
                             <Text style={styles.buttonText}>Add Job</Text>
                         </TouchableOpacity>

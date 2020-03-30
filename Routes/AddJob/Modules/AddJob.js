@@ -91,6 +91,35 @@ export function getSelectedAddress(payload, resType){
   }
 }
 
+export function addJob(jobDetails){
+  var collections = database.collection('jobs');
+  const receivedData = {
+    accessories: null,
+        client: jobDetails.client,
+        clientId: jobDetails.id_number,
+        distance: jobDetails.distanceMatrix.rows[0].elements[0].distance.text,
+        pickUp:{
+          time: jobDetails.pickUpTime,
+          address: jobDetails.pickUpAddress,
+          lat: jobDetails.pickUpLat,
+          long: jobDetails.pickUpLong,
+        },
+        dropOff:{
+          Time: jobDetails.dropOffTime,
+          address: jobDetails.dropOffAddress,
+          lat: jobDetails.dropOffLat,
+          long: jobDetails.dropOffLong,
+        },      
+        goodsDescription: jobDetails.goodsDescription,
+        jobId: jobDetails.jobId,            
+        status: jobDetails.status,
+        trailerType: jobDetails.trailerType,
+        vehicleType: jobDetails.vehicleType,
+        weight: jobDetails.weight
+  }
+  //add data to database and dispatch jobs array to store
+}
+
 //--------------------
 //Action Handlers
 //--------------------
