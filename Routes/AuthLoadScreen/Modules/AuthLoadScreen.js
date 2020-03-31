@@ -89,22 +89,22 @@ export function getUserData(userId){
 	}	
 }
 
-export function getAllJobs(){
+export function getAllJobs(idnumber){
 	var jobsCollection = database.collection('jobs');
-	var jobsObject = {};
+	var allJobs = [];
 	return(dispatch) => {
-		jobsCollection.get()
+		jobsCollection.where('clientId', '==', idnumber)
+		.get()
 		.then(function(querySnapshot) {
 			querySnapshot.forEach(function(doc) {
 				// doc.data() is never undefined for query doc snapshots
-				var docId = doc.id;
-				jobsObject[docId] = doc.data();
+				allJobs.push(doc.data());
 			});
 		})
 		.then(()=>{
 			dispatch({
 				type:GET_USER_JOBS,
-				payload: jobsObject	
+				payload: allJobs	
 			})
 		})
 	}
@@ -173,14 +173,10 @@ function handleGetDriverBids(state, action){
 }
 
 const ACTION_HANDLERS = {
-  GET_DRIVER_LOCATION:handleGetDriverLocation,
   GET_USER_DATA:handleGetUserData,
-  GET_USER_ACCOUNTS:handleGetUserAccount,
   GET_USER_JOBS:handleGetAllJobs,
-  DRIVER_BIDS:handleGetDriverBids,
 }
 const initialState = {
-  allJobs: {}
 };
 
 export function AuthLoadScreenReducer (state = initialState, action){

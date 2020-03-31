@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import AuthLoadScreen from "../Components/AuthLoadScreen";
 import {
-	getUserData
+	getUserData,
+	getAllJobs
 } from "../Modules/AuthLoadScreen";
 //states from modules home.js
 const mapStateToProps = (state) => ({
@@ -9,6 +10,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionCreators = {
-	getUserData
+	getUserData,
+	getAllJobs
 };
 export default connect(mapStateToProps, mapActionCreators)(AuthLoadScreen);

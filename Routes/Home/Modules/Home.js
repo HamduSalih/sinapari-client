@@ -46,7 +46,6 @@ const ACTION_HANDLERS = {
 }
 const initialState = {
   region:{},
-  allBids: {}
 };
 
 export function HomeReducer (state = initialState, action){

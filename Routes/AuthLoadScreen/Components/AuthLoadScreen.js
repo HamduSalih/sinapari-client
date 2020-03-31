@@ -17,6 +17,7 @@ class AuthloadScreen extends React.Component{
 	}
 
 	componentDidMount(){
+
 		setTimeout(() => {
 			this._bootstrapAsync();
 		}, 5000);
@@ -29,6 +30,7 @@ class AuthloadScreen extends React.Component{
             Actions.login();
         } else{
 			this.props.getUserData(driverLicense),
+			this.props.getAllJobs(driverLicense),
             Actions.home();
         }
     }
