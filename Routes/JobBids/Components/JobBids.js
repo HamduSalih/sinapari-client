@@ -7,7 +7,7 @@ import Constants from 'expo-constants';
 const sinaLogo = require("../../../assets/img/sinapari_blue.png");
 const truckMarker = require("../../../assets/img/truck_marker.png");
 
-class AllBids extends React.Component{
+class JobBids extends React.Component{
 	constructor(props){
 		super(props);
 	}
@@ -25,4 +25,4 @@ render(){
 	}
 }
 
-export default AllBids;
+export default JobBids;

@@ -7,7 +7,7 @@ import RegisterContainer from './Register/Containers/RegisterContainer'
 import RegProcessContainer from './RegProcess/Containers/RegProcessContainer'
 import HomeContainer from './Home/Containers/HomeContainer'
 import AddJobContainer from './AddJob/Containers/AddJobContainer'
-import AllBidsContainer from './AllBids/Containers/AllBidsContainer'
+import JobBidsContainer from './JobBids/Containers/JobBidsContainer'
 
 
 const scenes = Actions.create(
@@ -18,7 +18,7 @@ const scenes = Actions.create(
 		<Scene key='regprocess' hideNavBar type={ActionConst.RESET} component={RegProcessContainer} title="RegProcess" />
 		<Scene key="home" type={ActionConst.RESET} component={HomeContainer} title="Home" />
 		<Scene key="addJob" component={AddJobContainer} title="Create Job" />
-		<Scene key="allBids" component={AllBidsContainer} title="All Bids" />
+		<Scene key="jobBids" component={JobBidsContainer} title="Bids" />
 	</Scene>
 
 );

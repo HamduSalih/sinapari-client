@@ -48,7 +48,7 @@ const initialState = {
   region:{},
 };
 
-export function AllBidsReducer (state = initialState, action){
+export function JobBidsReducer (state = initialState, action){
 	const handler = ACTION_HANDLERS[action.type];
 
 	return handler ? handler(state, action) : state;

@@ -14,7 +14,7 @@ const RenderJobs = ({allJobs}) => {
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   
   function _navigate(param){
-    Actions.driverjobdetails({jobDetails: param});
+    Actions.driverjobdetails({jobBids: param});
   }
       
   function Item({ title }) {

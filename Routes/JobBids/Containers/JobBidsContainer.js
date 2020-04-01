@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import AllBids from "../Components/AllBids";
+import JobBids from "../Components/JobBids";
 import {
 	
-} from "../Modules/AllBids";
+} from "../Modules/JobBids";
 //states from modules home.js
 const mapStateToProps = (state) => ({
 	
@@ -11,4 +11,4 @@ const mapStateToProps = (state) => ({
 const mapActionCreators = {
 	
 };
-export default connect(mapStateToProps, mapActionCreators)(AllBids);
+export default connect(mapStateToProps, mapActionCreators)(JobBids);
