@@ -15,7 +15,7 @@ const RenderJobs = ({jobBids}) => {
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   
   function _navigate(param){
-    Actions.driverjobdetails({jobDetails: param});
+    Actions.currentJob({bidDetails: param});
   }
 
   function Item({ title }) {
@@ -25,14 +25,16 @@ const RenderJobs = ({jobBids}) => {
         <TouchableOpacity
           onPress={_navigate.bind(this, title)}
         >
-          <View>
-            <Text>Driver Name: {title.driverName}</Text>
-            <Text>Amount: GHS{title.amount}</Text>
+          <View style={styles.itemView}>
+            <Text style={styles.itemText}>Driver Name: {title.driverName}</Text>
           </View>
-          <View>
-            <Text>Truck No.: {title.truck_number}</Text>
+          <View style={styles.itemView}>
+            <Text style={styles.itemText}>Amount: GHS {title.amount}</Text>
           </View>
-          <View>
+          <View style={styles.itemView}>
+            <Text style={styles.itemText}>Truck No.: {title.truck_number}</Text>
+          </View>
+          <View style={styles.itemView}>
           <StarRating
             starSize={20}
             disabled={true}
@@ -68,20 +70,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  scrollView: {
-  },
-  text: {
-    fontSize: 42,
-  },
-  locView: {
-    flexDirection: 'row',
-  },
-  locIcon: {
-    marginRight: 10,
-  },
-  locText: {
-    fontWeight: 'bold'
-  },
   headerText:{
     fontSize: 18,
     borderWidth: 1,
@@ -89,10 +77,11 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     width: '50%'
   },
-  dateStyle:{
-    fontSize: 12,
-    marginLeft: 18,
-    fontWeight: '100'
+  itemView:{
+    paddingVertical: 10
+  },
+  itemText:{
+    fontSize: 15
   }
 });
 
