@@ -14,14 +14,14 @@ const RenderJobs = ({allJobs}) => {
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   
   function _navigate(param){
-    Actions.driverjobdetails({jobBids: param});
+    Actions.jobBids({jobId: param});
   }
       
   function Item({ title }) {
     return (
       <Card>
         <TouchableOpacity
-          onPress={_navigate.bind(this, title)}
+          onPress={_navigate.bind(this, title.jobId)}
         >
         <View style={styles.locView}>
           <Text style={{width: '50%'}}>{title.trailerType}</Text>

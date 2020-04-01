@@ -14,6 +14,40 @@ export default class Login extends Component{
         Actions.register({userInfo: params})
     }
 
+    _login = async() => {
+        var clientCollection = database.collection('clients')
+
+        clientCollection.where('username', '==', this.state.username)
+        .where('password', '==', this.state.password)
+        .get()
+        .then(async(querySnapshot)=>{
+            querySnapshot.forEach(async(doc)=>{
+                await AsyncStorage.setItem('isLoggedIn', '1');
+                await AsyncStorage.setItem('driverLicense', doc.data().id_number);
+            })
+        })
+        .then(async()=>{
+            const userToken = await AsyncStorage.getItem('isLoggedIn');
+            const driverLicense = await AsyncStorage.getItem('driverLicense');
+            if(userToken !== '1'){
+                Actions.login();
+            } else{
+                Actions.home({userId: driverLicense});
+            }
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+
+        /**if(userInfo.username === this.state.username && userInfo.password === this.state.password){
+            //alert('Logged In');
+            await AsyncStorage.setItem('isLoggedIn', '1');
+            this.props.navigation.navigate('Root');
+        }else{
+            alert('User info not corrected')
+        } */
+    }
+
     render(){
         return(
             <View style={{
@@ -40,7 +74,9 @@ export default class Login extends Component{
                         secureTextEntry
                     />
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.userButton}>
+                        <TouchableOpacity style={styles.userButton}
+                            onPress={this._login}
+                        >
                             <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.userButton}

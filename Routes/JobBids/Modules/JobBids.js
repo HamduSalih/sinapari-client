@@ -23,7 +23,7 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
 //THESE ARE ACTIONS CONSTANTS THEY SHOULD BE CALLED 
 //IN actionConstants.js
 const { 
-	
+	GET_JOB_BIDS
 	  } = constants;
 
 
@@ -34,15 +34,40 @@ const LONGITUDE_DELTA = 0.035;
 //---------------
 //Actions
 //---------------
+export function getJobBids(jobId){
+	var collections = database.collection('bids');
+	var jobBids = []
 
+	return(dispatch)=>{
+		collections.where('jobId', '==', jobId)
+		.get()
+		.then((querySnapshot)=>{
+			querySnapshot.forEach((doc)=>{
+				jobBids.push(doc.data())
+			})
+		})
+		.then(()=>{
+			dispatch({
+				type:GET_JOB_BIDS,
+				payload: jobBids
+			})
+		})
+	}
+}
 
 //--------------------
 //Action Handlers
 //--------------------
-
+function handleGetJobBids(state, action){
+	return update(state, {
+		jobBids:{
+			$set: action.payload
+		}
+	})
+}
 
 const ACTION_HANDLERS = {
- 
+	GET_JOB_BIDS:handleGetJobBids
 }
 const initialState = {
   region:{},
