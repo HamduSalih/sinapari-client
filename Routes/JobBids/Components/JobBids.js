@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, ActivityIndicator, Dimensions} from "react-nativ
 import { Container }  from "native-base";
 import { Actions } from 'react-native-router-flux';
 import Constants from 'expo-constants';
+import RenderJobs from './RenderJobs'
 
 const sinaLogo = require("../../../assets/img/sinapari_blue.png");
 const truckMarker = require("../../../assets/img/truck_marker.png");
@@ -24,7 +25,15 @@ render(){
 				<View style={{flex:1}}>
 					{
 						!this.props.jobBids &&
-						<ActivityIndicator size="large" color='#141d48'/>
+						<ActivityIndicator
+							size="large" 
+							color='#141d48'
+							style={styles.activityIndicator}/>
+					}
+					{
+						this.props.jobBids &&
+						<RenderJobs
+							jobBids={this.props.jobBids}/>
 					}
 				</View>
 			</Container>
@@ -35,9 +44,7 @@ render(){
 
 const styles = StyleSheet.create({
 	activityIndicator:{
-		position: 'absolute',
-		marginTop: height/2,
-		marginLeft: width/2
+		marginTop: (40/100)*(height),
 	}
 })
 

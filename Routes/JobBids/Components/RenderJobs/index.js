@@ -4,11 +4,12 @@ import { Card } from 'react-native-elements';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Actions } from 'react-native-router-flux';
+import StarRating from 'react-native-star-rating'
 
-const RenderJobs = ({allJobs}) => {
+const RenderJobs = ({jobBids}) => {
   
 
-  var DATA = allJobs //pass allJobs array to data variable 
+  var DATA = jobBids //pass allJobs array to data variable 
   //to be used to render all jobs with cards
   
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -16,37 +17,30 @@ const RenderJobs = ({allJobs}) => {
   function _navigate(param){
     Actions.driverjobdetails({jobDetails: param});
   }
-      
+
   function Item({ title }) {
+    const rating = title.rating
     return (
       <Card>
         <TouchableOpacity
           onPress={_navigate.bind(this, title)}
         >
-        <View style={styles.locView}>
-          <Text style={{width: '50%'}}>{title.trailerType}</Text>
-          <Text style={{width: '50%', textAlign: 'right', marginBottom: 10}}>{title.distance}</Text>
-        </View>
-          <View style = {styles.locView}>
-            <FontAwesome style={styles.locIcon} size={20} name='dot-circle-o'/>
-            <Text style={styles.locText}>{title.pickUp.address}</Text>
+          <View>
+            <Text>Driver Name: {title.driverName}</Text>
+            <Text>Amount: GHS{title.amount}</Text>
           </View>
-        <View style={styles.locView}>
-          <View style={{ 
-            height:35,
-            borderLeftWidth:2, 
-            marginLeft:7}}/>
-          <Text style={styles.dateStyle}>{new Date(title.pickUp.time * 1000).getDate() + ' ' + months[new Date(title.pickUp.time * 1000).getMonth()] + ' ' + new Date(title.pickUp.time * 1000).getFullYear() + ', ' + new Date(title.pickUp.time * 1000).getHours() + ':' + new Date(title.pickUp.time * 1000).getMinutes()}</Text>
-        </View>
-        <View style={styles.locView}>
-          <Entypo style={styles.locIcon} size={17} name='circle'/>
-          <Text>{title.dropOff.address}</Text>
+          <View>
+            <Text>Truck No.: {title.truck_number}</Text>
           </View>
-        <View style={styles.locView}>
-          <View style={{
-            marginLeft:7}}/>
-            <Text style={styles.dateStyle}>{new Date(title.dropOff.Time * 1000).getDate() + ' ' + months[new Date(title.dropOff.Time * 1000).getMonth()] + ' ' + new Date(title.dropOff.Time * 1000).getFullYear() + ', ' + new Date(title.dropOff.Time * 1000).getHours() + ':' + new Date(title.dropOff.Time * 1000).getMinutes()}</Text>
-        </View>
+          <View>
+          <StarRating
+            starSize={20}
+            disabled={true}
+            maxStars={5}
+            rating={parseInt(rating)}
+            starColor='#141d48'
+          />
+          </View>
         </TouchableOpacity>
     </Card>
           );
@@ -75,7 +69,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {
-    backgroundColor: '#C2185B',
   },
   text: {
     fontSize: 42,
