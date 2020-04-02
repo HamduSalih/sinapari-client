@@ -6,6 +6,7 @@ import { RegProcessReducer as regprocess } from '../Routes/RegProcess/Modules/Re
 import { HomeReducer as home } from '../Routes/Home/Modules/Home'
 import { AddJobReducer as addJob } from '../Routes/AddJob/Modules/AddJob'
 import { JobBidsReducer as jobBids } from '../Routes/JobBids/Modules/JobBids'
+import { CurrentJobReducer as currentJob } from '../Routes/CurrentJob/Modules/CurrentJob'
 
 export const makeRootReducer = () => {
 	return combineReducers({
@@ -15,7 +16,8 @@ export const makeRootReducer = () => {
 		regprocess,
 		home,
 		addJob,
-		jobBids
+		jobBids,
+		currentJob
 	});
 }
 

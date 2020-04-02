@@ -8,6 +8,7 @@ import RegProcessContainer from './RegProcess/Containers/RegProcessContainer'
 import HomeContainer from './Home/Containers/HomeContainer'
 import AddJobContainer from './AddJob/Containers/AddJobContainer'
 import JobBidsContainer from './JobBids/Containers/JobBidsContainer'
+import CurrentJobContainer from './CurrentJob/Containers/CurrentJobContainer'
 
 
 const scenes = Actions.create(
@@ -19,6 +20,7 @@ const scenes = Actions.create(
 		<Scene key="home" type={ActionConst.RESET} component={HomeContainer} title="Home" />
 		<Scene key="addJob" component={AddJobContainer} title="Create Job" />
 		<Scene key="jobBids" component={JobBidsContainer} title="Bids" />
+		<Scene key="currentJob" component={CurrentJobContainer} title="Current Job" />
 	</Scene>
 
 );
