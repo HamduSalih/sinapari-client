@@ -19,7 +19,9 @@ class CurrentJob extends React.Component{
 	}
 
 	componentDidMount(){
-		
+		if(this.props.bidDetails.status == 'accepted'){
+			this.props.getDriverLocation(this.props.bidDetails)
+		}
   	}
 
   componentDidUpdate(prevProps, prevState){
@@ -29,16 +31,17 @@ class CurrentJob extends React.Component{
   } 
 
 render(){
-	const region = this.props.region
-
 		return(
 			<View style={{flex:1}}>
-				<MapContainer 
-					region={region}							
-				/>
+				{
+					this.props.region &&
+					<MapContainer 
+						region={this.props.region}							
+					/>
+				}
 
 				<ScrollContainer 
-					jobDetails={this.props.jobDetails}
+					jobDetails={this.props.bidDetails}
 					updateBidTripStatus={this.props.updateBidTripStatus}
 				/>
 				<BottomTab />

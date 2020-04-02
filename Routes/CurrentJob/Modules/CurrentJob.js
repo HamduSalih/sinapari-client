@@ -35,7 +35,8 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
 //THESE ARE ACTIONS CONSTANTS THEY SHOULD BE CALLED 
 //IN actionConstants.js
 const {
-  DRIVER_BIDS
+  DRIVER_BIDS,
+  DRIVER_LOCATION
 	  } = constants;
 
 
@@ -46,6 +47,32 @@ const LONGITUDE_DELTA = 0.035;
 //---------------
 //Actions
 //---------------
+export function getDriverLocation(bidDetails){
+	//we will get location of driver from locations collections
+	//using driver id from the biddetails
+
+	var locationCollection = database.collection('locations').doc((bidDetails.driverId).toString())
+	var region 
+	return(dispatch)=>{
+		 locationCollection
+		 .onSnapshot((doc)={
+			region = {
+				latitude: (doc.data()).lat,
+				longitude: (doc.data()).long,
+				LATITUDE_DELTA,
+				LONGITUDE_DELTA
+			}
+		 })
+		 .then(()=>{
+			 dispatch({
+				 type:DRIVER_LOCATION,
+				 payload: region
+			 })
+		 })
+	 }
+}
+
+
 export function updateBidTripStatus(bid){
 	var collections = database.collection('bids');
 	var docId = '';
@@ -112,9 +139,18 @@ function handleGetDriverBids(state, action){
 	})
 }
 
+function handleDriverLocation(state, action){
+	return update(state, {
+		region:{
+			$set: action.payload
+		}
+	})
+}
+
 
 const ACTION_HANDLERS = {
-  DRIVER_BIDS: handleGetDriverBids
+  DRIVER_BIDS: handleGetDriverBids,
+  DRIVER_LOCATION:handleDriverLocation
 }
 
 const initialState = {
