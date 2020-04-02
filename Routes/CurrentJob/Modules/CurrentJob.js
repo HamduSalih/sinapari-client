@@ -55,7 +55,7 @@ export function getDriverLocation(bidDetails){
 	var region 
 	return(dispatch)=>{
 		 locationCollection
-		 .onSnapshot((doc)={
+		 .onSnapshot((doc)=>{
 			region = {
 				latitude: (doc.data()).lat,
 				longitude: (doc.data()).long,

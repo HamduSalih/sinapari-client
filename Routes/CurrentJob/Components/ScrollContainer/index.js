@@ -57,17 +57,11 @@ class ScrollContainer extends Component{
 
     render(){
         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        var bidDetails = this.props.bidDetails;
-        var minutesSourcePickUp = new Date(bidDetails.pickUpAddress.time.seconds * 1000).getMinutes();
-        var minutesPickUp = minutesSourcePickUp < 10 ? '0' + minutesSourcePickUp : minutesSourcePickUp;
-
-        var minutesSourceDropOff = new Date(bidDetails.pickUpAddress.time.seconds * 1000).getMinutes();
-        var minutesDropOff = minutesSourceDropOff < 10 ? '0' + minutesSourceDropOff : minutesSourceDropOff;
+        var bidDetails = this.props.bidDetails[0]
         return(
             <View
               style={styles.container}>
                 <ScrollView contentContainerStyle={styles.scrollStyle}>
-                    <Text style={styles.pickUpTime}>Pick Up at {new Date(bidDetails.pickUpAddress.time.seconds * 1000).getDate() + ' ' + months[new Date(bidDetails.pickUpAddress.time.seconds * 1000).getMonth()] + ' ' + new Date(bidDetails.pickUpAddress.time.seconds * 1000).getFullYear() + ', ' + new Date(bidDetails.pickUpAddress.time.seconds * 1000).getHours() + ' ' + ':' + minutesPickUp}</Text>
                     <View style={styles.payoutView}>
                         <View style={styles.payoutViewViews, {borderRightWidth: 1, borderRightColor: 'grey', paddingRight: 40}}>
                             <Text>Payout</Text>
@@ -110,7 +104,7 @@ class ScrollContainer extends Component{
                             height:35,
                             borderLeftWidth:2, 
                             marginLeft:7}}/>
-                          <Text style={styles.dateStyle}>{new Date(bidDetails.pickUpAddress.time.seconds * 1000).getDate() + ' ' + months[new Date(bidDetails.pickUpAddress.time.seconds * 1000).getMonth()] + ' ' + new Date(bidDetails.pickUpAddress.time.seconds * 1000).getFullYear() + ', ' + new Date(bidDetails.pickUpAddress.time.seconds * 1000).getHours() + ':' + minutesPickUp}</Text>
+                          <Text style={styles.dateStyle}>{new Date(bidDetails.pickUpAddress.time * 1000).getDate() + ' ' + months[new Date(bidDetails.pickUpAddress.time * 1000).getMonth()] + ' ' + new Date(bidDetails.pickUpAddress.time * 1000).getFullYear() + ', ' + new Date(bidDetails.pickUpAddress.time * 1000).getHours()}</Text>
                         </View>
                         <View style={styles.locView}>
                             <Entypo style={styles.locIcon} size={17} name='circle'/>
@@ -119,7 +113,7 @@ class ScrollContainer extends Component{
                         <View style={styles.locView}>
                             <View style={{
                             marginLeft:7}}/>
-                            <Text style={styles.dateStyle}>{new Date(bidDetails.dropOffAddress.time.seconds * 1000).getDate() + ' ' + months[new Date(bidDetails.dropOffAddress.time.seconds * 1000).getMonth()] + ' ' + new Date(bidDetails.dropOffAddress.time.seconds * 1000).getFullYear() + ', ' + new Date(bidDetails.dropOffAddress.time.seconds * 1000).getHours() + ':' + minutesDropOff}</Text>
+                            <Text style={styles.dateStyle}>{new Date(bidDetails.dropOffAddress.time * 1000).getDate() + ' ' + months[new Date(bidDetails.dropOffAddress.time * 1000).getMonth()] + ' ' + new Date(bidDetails.dropOffAddress.time * 1000).getFullYear() + ', ' + new Date(bidDetails.dropOffAddress.time * 1000).getHours()}</Text>
                         </View>
                     </View>
                 </ScrollView>

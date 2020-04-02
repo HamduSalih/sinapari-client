@@ -41,10 +41,9 @@ render(){
 				}
 
 				<ScrollContainer 
-					jobDetails={this.props.bidDetails}
+					bidDetails={this.props.bidDetails}
 					updateBidTripStatus={this.props.updateBidTripStatus}
 				/>
-				<BottomTab />
 			</View>
 		);
 
