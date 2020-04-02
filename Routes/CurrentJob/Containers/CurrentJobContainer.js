@@ -7,7 +7,7 @@ import {
 //states from modules home.js
 const mapStateToProps = (state) => ({
 	region: state.currentJob.region,
-	liveJob: state.currentJob.liveJob
+	jobBids: state.currentJob.jobBids
 });
 
 const mapActionCreators = {

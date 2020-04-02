@@ -16,35 +16,39 @@ class ScrollContainer extends Component{
         buttonText: 'Start Job'
     };
 
-    async componentDidMount(){
-        if(this.props.bidDetails.tripStatus == 'pending'){
+    componentDidMount(){
+        if(this.props.bidDetails[0].status == 'pending'){
             this.setState({buttonText: 'Accept'});
-        }else if(this.props.bidDetails.tripStatus == 'accepted'){
+        }else if(this.props.bidDetails[0].status == 'accepted'){
             this.setState({buttonText: 'Cancel Job'});
-        }else if(this.props.bidDetails.tripStatus == 'live'){
+        }else if(this.props.bidDetails[0].tripStatustatus == 'live'){
             this.setState({buttonText: 'Confirm Completion'});
-        }else if(this.props.bidDetails.tripStatus == 'completed'){
+        }else if(this.props.bidDetails[0].tripStatus == 'completed'){
             this.setState({buttonText: 'Job Completed'});
         }
     }
 
     componentWillReceiveProps(nextProps){
        /**
-        *  if(nextProps.bidDetails.tripStatus !== 'live'){
+        *  if(nextProps.bidDetails[0].tripStatus !== 'live'){
             this.setState({buttonText: 'Start Job'});
-        }else if(nextProps.bidDetails.tripStatus == 'live'){
+        }else if(nextProps.bidDetails[0].tripStatus == 'live'){
             this.setState({buttonText: 'Complete Trip'});
         }
         */
     }
 
     onPressEvent = () => {
-        if(this.state.buttonText == 'Start Job'){
-            /**this.props.updateBidTripStatus(this.props.bidDetails),
-            this.setState({buttonText: 'Complete Job'}),
-            this.props.createLiveJob(this.props.bidDetails) */
-            this.props.updateBidTripStatus(this.props.bidDetails, 
-                this.setState({buttonText: 'Complete Job'}))}
+        if(this.state.buttonText == 'Accept'){
+            this.props.updateBidTripStatus(this.props.bidDetails[0], 'accepted'),
+            this.setState({buttonText: 'Cancel Job'})
+        }else if(this.state.buttonText == 'Cancel Job'){
+            this.props.updateBidTripStatus(this.props.bidDetails[0], 'canceled'),
+            this.setState({buttonText: 'Canceled'})
+        }else if(this.state.buttonText == 'Confirm Completion'){
+            this.props.updateBidTripStatus(this.props.bidDetails[0], 'completed'),
+            this.setState({buttonText: 'Job Completed'})
+        }
     }
 
     componentDidUpdate(){

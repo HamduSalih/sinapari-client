@@ -35,8 +35,8 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
 //THESE ARE ACTIONS CONSTANTS THEY SHOULD BE CALLED 
 //IN actionConstants.js
 const {
-  DRIVER_BIDS,
-  DRIVER_LOCATION
+	GET_JOB_BIDS,
+  	DRIVER_LOCATION
 	  } = constants;
 
 
@@ -73,57 +73,54 @@ export function getDriverLocation(bidDetails){
 }
 
 
-export function updateBidTripStatus(bid){
+export function updateBidTripStatus(bid, buttonText){
 	var collections = database.collection('bids');
 	var docId = '';
-	var allBids = [];
+	var jobBids = [];
 
-	return (dispatch) => {
-		collections.where('driverId', '==', bid.driverId)
-		.where('bidId', '==', bid.bidId)
-		.where('status', '==', 'accepted')
-		.get()
-		.then((querySnapshot)=>{
-			querySnapshot.forEach((doc)=>{
-				docId = doc.id
+	if(buttonText == 'accepted'){
+		return (dispatch)=>{
+			collections.where('driverId', '==', bid.driverId)
+			.where('bidId', '==', bid.bidId)
+			.where('status', '==', 'pending')
+			.get()
+			.then((querySnapshot)=>{
+				querySnapshot.forEach((doc)=>{
+					docId = doc.id
+				})
 			})
-		})
-		.then(()=>{
-			collections.doc(docId)
-			.update({
-			tripStatus: 'live'
+			.then(()=>{
+				collections.doc(docId)
+				.update({
+					status: 'accepted'
+				})
 			})
-    })
-    .then(()=>{
-      collections.where('driverId', '==', bid.driverId)
-      .get()
-      .then((querySnapshot)=>{
-        querySnapshot.forEach((doc)=>{
-          allBids.push(doc.data());
-        })
-      })
-      .then(()=>{
-        dispatch({
-          type: DRIVER_BIDS,
-          payload: allBids
-        })
-      })
-    })
-    /**
-
-		collections.where('driverId', '==', bid.driverId)
-		.get()
-		.then((querySnapshot)=>{
-			querySnapshot.forEach((doc)=>{
-				allBids.push(doc.data());
+			.then(()=>{
+				collections.where('driverId', '==', bid.driverId)
+				.where('bidId', '==', bid.bidId)
+				.where('status', '==', 'pending')
+				.get()
+				.then((querySnapshot)=>{
+					querySnapshot.forEach((doc)=>{
+						collections.doc(doc.id).delete()
+					})
+				})
 			})
-		})
-		.then(()=>{
-			dispatch({
-				type: DRIVER_BIDS,
-				payload: allBids
+			.then(()=>{
+			collections.where('jobId', '==', bid.jobId)
+			.get()
+			.then((querySnapshot)=>{
+				querySnapshot.forEach((doc)=>{
+				jobBids.push(doc.data());
+				})
 			})
-		}) */
+			.then(()=>{
+				dispatch({
+				type: GET_JOB_BIDS,
+				payload: jobBids
+				})
+			})
+			})}
 	}
 }
 
@@ -133,7 +130,7 @@ export function updateBidTripStatus(bid){
 //--------------------
 function handleGetDriverBids(state, action){
 	return update(state, {
-		allBids:{
+		jobBids:{
 			$set: action.payload
 		}
 	})
@@ -149,8 +146,8 @@ function handleDriverLocation(state, action){
 
 
 const ACTION_HANDLERS = {
-  DRIVER_BIDS: handleGetDriverBids,
-  DRIVER_LOCATION:handleDriverLocation
+	GET_JOB_BIDS: handleGetDriverBids,
+ 	DRIVER_LOCATION:handleDriverLocation
 }
 
 const initialState = {
