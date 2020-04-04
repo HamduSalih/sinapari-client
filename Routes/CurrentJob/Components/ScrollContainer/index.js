@@ -19,11 +19,13 @@ class ScrollContainer extends Component{
     componentDidMount(){
         if(this.props.bidDetails[0].status == 'pending'){
             this.setState({buttonText: 'Accept'});
-        }else if(this.props.bidDetails[0].status == 'accepted'){
+        }else if(this.props.bidDetails[0].status == 'accepted' && this.props.bidDetails[0].tripStatus !== 'live' && this.props.bidDetails[0].tripStatus !== 'completed'){
             this.setState({buttonText: 'Cancel Job'});
-        }else if(this.props.bidDetails[0].tripStatustatus == 'live'){
-            this.setState({buttonText: 'Confirm Completion'});
+        }else if(this.props.bidDetails[0].status == 'accepted' && this.props.bidDetails[0].tripStatus !== 'live' && this.props.bidDetails[0].tripStatus !== 'completed'){
+            this.setState({buttonText: 'Job is Live'});
         }else if(this.props.bidDetails[0].tripStatus == 'completed'){
+            this.setState({buttonText: 'Confirm Completion'});
+        }else if(this.props.bidDetails[0].ownerStatus == 'completed'){
             this.setState({buttonText: 'Job Completed'});
         }
     }

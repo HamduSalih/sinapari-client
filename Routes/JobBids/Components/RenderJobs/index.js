@@ -35,13 +35,7 @@ const RenderJobs = ({jobBids}) => {
             <Text style={styles.itemText}>Truck No.: {title.truck_number}</Text>
           </View>
           <View style={styles.itemView}>
-          <StarRating
-            starSize={20}
-            disabled={true}
-            maxStars={5}
-            rating={parseInt(rating)}
-            starColor='#141d48'
-          />
+            <Text style={styles.itemText}>Job Id: {title.jobId}</Text>
           </View>
         </TouchableOpacity>
     </Card>
