@@ -24,23 +24,17 @@ export default class BottomTab extends React.Component {
 
     //tab bar items
     const tabs = [{
-        title:'Home',
-        subTitle:'',
-        icon:'home',
-        sceneKey: 'driverBotTab'
-    },
-    {
-        title:'My Bids',
-        subTitle:'',
-        icon:'monetization-on',
-        sceneKey: 'myBids'
-    },
-    {
-        title:'Profile',
-        subTitle:'',
-        icon:'person',
-        sceneKey: 'driverProfile'
-    }
+            title:'Home',
+            subTitle:'',
+            icon:'home',
+            sceneKey: 'driverBotTab'
+        },
+        {
+            title:'Current Jobs',
+            subTitle:'',
+            icon:'work',
+            sceneKey: 'currentJobs'
+        },
     ];
 
     return (
