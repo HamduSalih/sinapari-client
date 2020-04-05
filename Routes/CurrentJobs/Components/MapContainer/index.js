@@ -4,8 +4,6 @@ import MapView from "react-native-maps";
 import styles from "./MapContainerStyles.js";
 import MapViewDirections from 'react-native-maps-directions';
 
-const markerImage = require('../../../../assets/img/marker.png')
-
 export const MapContainer = ({
 		region,
 	})=>{
@@ -29,13 +27,25 @@ export const MapContainer = ({
 
 		return(
 			<MapView
+				showsUserLocation
+				followsUserLocation
 				provider={MapView.PROVIDER_GOOGLE}
 				style={styles.map}
 				region={region}
 			>
-				<MapView.Marker
-					coordinate={{latitude:region.latitude, longitude:region.longitude}}
-					image={markerImage}
+				<MapViewDirections 
+					origin={pickUpOrigin}
+					destination={pickUpDestination}
+					apikey={GOOGLE_MAPS_APIKEY}
+					strokeWidth={3}
+					strokeColor={'green'}
+				/>
+				<MapViewDirections 
+					origin={origin}
+					destination={destination}
+					apikey={GOOGLE_MAPS_APIKEY}
+					strokeWidth={3}
+					strokeColor={'blue'}
 				/>
 			</MapView>
 	)

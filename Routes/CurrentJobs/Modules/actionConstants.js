@@ -1,0 +1,4 @@
+export default {
+	GET_JOB_BIDS: 'GET_JOB_BIDS',
+	DRIVER_LOCATION:'DRIVER_LOCATION'
+};

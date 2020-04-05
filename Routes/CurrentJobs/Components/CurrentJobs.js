@@ -8,20 +8,18 @@ import ScrollContainer from './ScrollContainer'
 const sinaLogo = require("../../../assets/img/sinapari_blue.png");
 const truckMarker = require("../../../assets/img/truck_marker.png");
 
-class CurrentJob extends React.Component{
+class CurrentJobs extends React.Component{
 	constructor(props){
 		super(props);
 		
 	}
 
 	state = {
-		driverLicense: this.props.userId,
+		
 	}
 
 	componentDidMount(){
-		if(this.props.bidDetails[0].tripStatus == 'live'){
-			this.props.getDriverLocation(this.props.bidDetails[0])
-		}
+		
   	}
 
   componentDidUpdate(prevProps, prevState){
@@ -50,4 +48,4 @@ render(){
 	}
 }
 
-export default CurrentJob;
+export default CurrentJobs;

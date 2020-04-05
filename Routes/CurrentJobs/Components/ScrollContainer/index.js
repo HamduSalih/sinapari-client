@@ -21,7 +21,7 @@ class ScrollContainer extends Component{
             this.setState({buttonText: 'Accept'});
         }else if(this.props.bidDetails[0].status == 'accepted' && this.props.bidDetails[0].tripStatus !== 'live' && this.props.bidDetails[0].tripStatus !== 'completed'){
             this.setState({buttonText: 'Cancel Job'});
-        }else if(this.props.bidDetails[0].status == 'accepted' && this.props.bidDetails[0].tripStatus == 'live' && this.props.bidDetails[0].tripStatus !== 'completed'){
+        }else if(this.props.bidDetails[0].status == 'accepted' && this.props.bidDetails[0].tripStatus !== 'live' && this.props.bidDetails[0].tripStatus !== 'completed'){
             this.setState({buttonText: 'Job is Live'});
         }else if(this.props.bidDetails[0].tripStatus == 'completed'){
             this.setState({buttonText: 'Confirm Completion'});

@@ -42,8 +42,8 @@ const {
 
 const {width, height} = Dimensions.get("window");
 let ASPECT_RATIO = width / height;
-const LATITUDE_DELTA = 0.05;
-const LONGITUDE_DELTA = 0.05; 
+const LATITUDE_DELTA = 0.035;
+const LONGITUDE_DELTA = 0.035; 
 //---------------
 //Actions
 //---------------
@@ -51,20 +51,23 @@ export function getDriverLocation(bidDetails){
 	//we will get location of driver from locations collections
 	//using driver id from the biddetails
 
-	var locationCollection = database.collection('locations').doc(bidDetails.driverId)
+	var locationCollection = database.collection('locations').doc((bidDetails.driverId).toString())
 	var region 
 	return(dispatch)=>{
 		 locationCollection
 		 .onSnapshot((doc)=>{
-			dispatch({
-				type:DRIVER_LOCATION,
-				payload: {
-					latitude: (doc.data()).lat,
-					longitude: (doc.data()).long,
-					latitudeDelta: LATITUDE_DELTA,
-					longitudeDelta: LONGITUDE_DELTA
-				}
-			})
+			region = {
+				latitude: (doc.data()).lat,
+				longitude: (doc.data()).long,
+				LATITUDE_DELTA,
+				LONGITUDE_DELTA
+			}
+		 })
+		 .then(()=>{
+			 dispatch({
+				 type:DRIVER_LOCATION,
+				 payload: region
+			 })
 		 })
 	 }
 }
@@ -239,7 +242,7 @@ const initialState = {
   
 };
 
-export function CurrentJobReducer (state = initialState, action){
+export function CurrentJobsReducer (state = initialState, action){
 	const handler = ACTION_HANDLERS[action.type];
 
 	return handler ? handler(state, action) : state;

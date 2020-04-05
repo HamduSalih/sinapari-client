@@ -7,6 +7,7 @@ import { HomeReducer as home } from '../Routes/Home/Modules/Home'
 import { AddJobReducer as addJob } from '../Routes/AddJob/Modules/AddJob'
 import { JobBidsReducer as jobBids } from '../Routes/JobBids/Modules/JobBids'
 import { CurrentJobReducer as currentJob } from '../Routes/CurrentJob/Modules/CurrentJob'
+import { CurrentJobsReducer as currentJobs } from '../Routes/CurrentJobs/Modules/CurrentJobs'
 
 export const makeRootReducer = () => {
 	return combineReducers({
@@ -17,7 +18,8 @@ export const makeRootReducer = () => {
 		home,
 		addJob,
 		jobBids,
-		currentJob
+		currentJob,
+		currentJobs
 	});
 }
 
