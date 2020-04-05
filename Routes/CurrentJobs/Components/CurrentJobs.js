@@ -1,10 +1,12 @@
 import React from "react";
-import {View, Text, YellowBox} from "react-native";
+import {View, Text, YellowBox, ActivityIndicator} from "react-native";
 import { Container }  from "native-base";
 import { Actions } from 'react-native-router-flux';
 import MapContainer from "./MapContainer";
 import BottomTab from '../../../Navigtions/BottomTabContainer';
 import ScrollContainer from './ScrollContainer'
+import RenderJobs from './RenderJobs'
+
 const sinaLogo = require("../../../assets/img/sinapari_blue.png");
 const truckMarker = require("../../../assets/img/truck_marker.png");
 
@@ -19,7 +21,7 @@ class CurrentJobs extends React.Component{
 	}
 
 	componentDidMount(){
-		
+		this.props.getCurrentJobs((this.props.userData))
   	}
 
   componentDidUpdate(prevProps, prevState){
@@ -32,16 +34,17 @@ render(){
 		return(
 			<View style={{flex:1}}>
 				{
-					this.props.region &&
-					<MapContainer 
-						region={this.props.region}							
-					/>
+					!this.props.currentJobs &&
+					<ActivityIndicator
+						size="large" 
+						color='#141d48'
+						style={styles.activityIndicator}/>
 				}
-
-				<ScrollContainer 
-					bidDetails={this.props.bidDetails}
-					updateBidTripStatus={this.props.updateBidTripStatus}
-				/>
+				{
+						this.props.currentJobs &&
+						<RenderJobs
+							currentJobs={this.props.currentJobs}/>
+					}
 			</View>
 		);
 

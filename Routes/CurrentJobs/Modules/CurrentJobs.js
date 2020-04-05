@@ -35,8 +35,7 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
 //THESE ARE ACTIONS CONSTANTS THEY SHOULD BE CALLED 
 //IN actionConstants.js
 const {
-	GET_JOB_BIDS,
-  	DRIVER_LOCATION
+	GET_CURRENT_JOBS
 	  } = constants;
 
 
@@ -47,168 +46,25 @@ const LONGITUDE_DELTA = 0.035;
 //---------------
 //Actions
 //---------------
-export function getDriverLocation(bidDetails){
-	//we will get location of driver from locations collections
-	//using driver id from the biddetails
+export function getCurrentJobs(userData){
+	var bidsCollection = database.collection('bids')
+	var currentJobs = []
 
-	var locationCollection = database.collection('locations').doc((bidDetails.driverId).toString())
-	var region 
-	return(dispatch)=>{
-		 locationCollection
-		 .onSnapshot((doc)=>{
-			region = {
-				latitude: (doc.data()).lat,
-				longitude: (doc.data()).long,
-				LATITUDE_DELTA,
-				LONGITUDE_DELTA
-			}
-		 })
-		 .then(()=>{
-			 dispatch({
-				 type:DRIVER_LOCATION,
-				 payload: region
-			 })
-		 })
-	 }
-}
-
-
-export function updateBidTripStatus(bid, buttonText){
-	var collections = database.collection('bids');
-	var driverJobsInfoCollection = database.collection('jobsInfo')
-	var docId = '';
-	var jobsInfoDocId = '';
-	var jobBids = [];
-
-	if(buttonText == 'accepted'){
-		return (dispatch)=>{
-			collections.where('driverId', '==', bid.driverId)
-			.where('bidId', '==', bid.bidId)
-			.where('status', '==', 'pending')
-			.get()
-			.then((querySnapshot)=>{
-				querySnapshot.forEach((doc)=>{
-					docId = doc.id
-				})
+	return (dispatch)=>{
+		bidsCollection.where('status', '==', 'accepted')
+		.where('client', '==', userData.client)
+		.get()
+		.then((querySnapshot)=>{
+			querySnapshot.forEach((doc)=>{
+				currentJobs.push(doc.data())
 			})
-			.then(()=>{
-				collections.doc(docId)
-				.update({
-					status: 'accepted'
-				})
+		})
+		.then(()=>{
+			dispatch({
+				type: GET_CURRENT_JOBS,
+				payload
 			})
-			.then(()=>{
-				collections.where('driverId', '==', bid.driverId)
-				.where('bidId', '==', bid.bidId)
-				.where('status', '==', 'pending')
-				.get()
-				.then((querySnapshot)=>{
-					querySnapshot.forEach((doc)=>{
-						collections.doc(doc.id).delete()
-					})
-				})
-			})
-			.then(()=>{
-			collections.where('jobId', '==', bid.jobId)
-			.get()
-			.then((querySnapshot)=>{
-				querySnapshot.forEach((doc)=>{
-				jobBids.push(doc.data());
-				})
-			})
-			.then(()=>{
-				dispatch({
-				type: GET_JOB_BIDS,
-				payload: jobBids
-				})
-			})
-			})}
-	}
-
-	if(buttonText == 'canceled'){
-		return (dispatch)=>{
-			collections.where('driverId', '==', bid.driverId)
-			.where('bidId', '==', bid.bidId)
-			.get()
-			.then((querySnapshot)=>{
-				querySnapshot.forEach((doc)=>{
-					collections.doc(doc.id).delete()
-				})
-			})
-			.then(()=>{
-			collections.where('jobId', '==', bid.jobId)
-			.get()
-			.then((querySnapshot)=>{
-				querySnapshot.forEach((doc)=>{
-				jobBids.push(doc.data());
-				})
-			})
-			.then(()=>{
-				dispatch({
-				type: GET_JOB_BIDS,
-				payload: jobBids
-				})
-			})
-			})
-		}
-	}
-
-	if(buttonText == 'completed'){
-		return (dispatch)=>{
-			collections.where('driverId', '==', bid.driverId)
-			.where('bidId', '==', bid.bidId)
-			.where('tripStatus', '==', 'completed')
-			.get()
-			.then((querySnapshot)=>{
-				querySnapshot.forEach((doc)=>{
-					docId = doc.id
-				})
-			})
-			.then(()=>{
-				collections.doc(docId)
-				.update({
-					status: 'completed',
-					ownerStatus: 'completed'
-				})
-			})
-			.then(()=>{
-				driverJobsInfoCollection.where('id', '==', bid.driverId)
-				.get()
-				.then((querySnapshot)=>{
-					querySnapshot.forEach((doc)=>{
-						jobsInfoDocId = doc.id
-						if((doc.data()).jobsCompleted == null){
-							const completedJobs = 0 + 1
-							driverJobsInfoCollection.doc(jobsInfoDocId)
-							.update({
-								jobsCompleted: completedJobs
-							})
-						}else{
-							const completedJobs = parseInt((doc.data()).jobsCompleted) + 1
-							driverJobsInfoCollection.doc(jobsInfoDocId)
-							.update({
-								jobsCompleted: completedJobs
-							})
-						}
-					})
-				})
-			})
-			.then(()=>{
-			collections.where('jobId', '==', bid.jobId)
-			.get()
-			.then((querySnapshot)=>{
-				querySnapshot.forEach((doc)=>{
-				jobBids.push(doc.data());
-				})
-			})
-			.then(()=>{
-				dispatch({
-				type: GET_JOB_BIDS,
-				payload: jobBids
-				})
-			})
-			})
-		}
+		})
 	}
 }
 
@@ -216,17 +72,9 @@ export function updateBidTripStatus(bid, buttonText){
 //--------------------
 //Action Handlers
 //--------------------
-function handleGetDriverBids(state, action){
+function handleCurrentJobs(state, action){
 	return update(state, {
-		jobBids:{
-			$set: action.payload
-		}
-	})
-}
-
-function handleDriverLocation(state, action){
-	return update(state, {
-		region:{
+		currentJobs:{
 			$set: action.payload
 		}
 	})
@@ -234,8 +82,7 @@ function handleDriverLocation(state, action){
 
 
 const ACTION_HANDLERS = {
-	GET_JOB_BIDS: handleGetDriverBids,
- 	DRIVER_LOCATION:handleDriverLocation
+	GET_CURRENT_JOBS: handleCurrentJobs
 }
 
 const initialState = {
