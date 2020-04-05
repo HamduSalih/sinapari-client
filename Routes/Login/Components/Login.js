@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, AsyncStorage, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { Button } from 'native-base'
 import { Actions } from 'react-native-router-flux'
+import * as firebase from 'firebase';
+import '@firebase/firestore';
+
+const database = firebase.firestore();
 
 export default class Login extends Component{
 
@@ -23,16 +27,16 @@ export default class Login extends Component{
         .then(async(querySnapshot)=>{
             querySnapshot.forEach(async(doc)=>{
                 await AsyncStorage.setItem('isLoggedIn', '1');
-                await AsyncStorage.setItem('driverLicense', doc.data().id_number);
+                await AsyncStorage.setItem('id_number', doc.data().id_number);
             })
         })
         .then(async()=>{
             const userToken = await AsyncStorage.getItem('isLoggedIn');
-            const driverLicense = await AsyncStorage.getItem('driverLicense');
+            const driverLicense = await AsyncStorage.getItem('id_number');
             if(userToken !== '1'){
                 Actions.login();
             } else{
-                Actions.home({userId: driverLicense});
+                Actions.authLoad();
             }
         })
         .catch((error)=>{

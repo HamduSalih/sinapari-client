@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, YellowBox, ActivityIndicator} from "react-native";
+import {View, Dimensions, StyleSheet, ActivityIndicator} from "react-native";
 import { Container }  from "native-base";
 import { Actions } from 'react-native-router-flux';
 import MapContainer from "./MapContainer";
@@ -7,6 +7,7 @@ import BottomTab from '../../../Navigtions/BottomTabContainer';
 import ScrollContainer from './ScrollContainer'
 import RenderJobs from './RenderJobs'
 
+const {width, height} = Dimensions.get("window");
 const sinaLogo = require("../../../assets/img/sinapari_blue.png");
 const truckMarker = require("../../../assets/img/truck_marker.png");
 
@@ -50,5 +51,10 @@ render(){
 
 	}
 }
+const styles = StyleSheet.create({
+	activityIndicator:{
+		marginTop: (40/100)*(height),
+	}
+})
 
 export default CurrentJobs;

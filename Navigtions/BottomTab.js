@@ -7,7 +7,7 @@ import {MaterialIcons} from '@expo/vector-icons'
 export default class BottomTab extends React.Component {
     _navigate = async (scenceLoc) => {
         try {
-            const driverLicense = await AsyncStorage.getItem('driverLicense');
+            const driverLicense = await AsyncStorage.getItem('id_number');
             if (driverLicense !== null){
                 console.log(driverLicense)
                 Actions[scenceLoc].call();
@@ -27,7 +27,7 @@ export default class BottomTab extends React.Component {
             title:'Home',
             subTitle:'',
             icon:'home',
-            sceneKey: 'driverBotTab'
+            sceneKey: 'home'
         },
         {
             title:'Current Jobs',

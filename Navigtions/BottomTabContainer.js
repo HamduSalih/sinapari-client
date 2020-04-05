@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import BottomTab from "./BottomTab";
 //states from modules home.js
 const mapStateToProps = (state) => ({
-	userData: state.driverhome.userData,
+	userData: state.authLoad.userData,
 });
 
 const mapActionCreators = {

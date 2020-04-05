@@ -62,7 +62,7 @@ export function getCurrentJobs(userData){
 		.then(()=>{
 			dispatch({
 				type: GET_CURRENT_JOBS,
-				payload
+				payload: currentJobs
 			})
 		})
 	}
