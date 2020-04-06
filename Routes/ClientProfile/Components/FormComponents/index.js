@@ -11,7 +11,7 @@ import styles from './FormComponentsStyles'
 
 export default class FormComponents extends React.Component{
     state={
-        driverId: this.props.userData.driver_license
+        driverId: this.props.userData.id_number
     }
 
     _updateProfile = (data) => {
@@ -20,7 +20,6 @@ export default class FormComponents extends React.Component{
 
     render(){
         return(
-            <View style={{flex: 1, paddingHorizontal: 10}}>
                 <ScrollView contentContainerStyle={styles.scrollView}>
                     <View style={styles.componentContainer}>
                         <Text style={styles.label}>Phone Number</Text>
@@ -105,7 +104,6 @@ export default class FormComponents extends React.Component{
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
-            </View>
         )
     }
 }
