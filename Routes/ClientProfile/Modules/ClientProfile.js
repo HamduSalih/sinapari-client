@@ -19,7 +19,7 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
 //THESE ARE ACTIONS CONSTANTS THEY SHOULD BE CALLED 
 //IN actionConstants.js
 const { 
-	UPDATE_PROFILE
+	GET_USER_DATA
 	  } = constants;
 
 
@@ -31,21 +31,31 @@ const LONGITUDE_DELTA = 0.035;
 //Actions
 //---------------
 export function updateProfile(data){
-	var collections = database.collection('drivers').doc(data.driverId.toString());
+	var collections = database.collection('clients')
+	var docId = ''
 	return(dispatch)=>{
-		collections.update({
-			phone_number: data.phone_number,
-			affiliate: data.affiliation,
-			trailer_length: data.trailer_length,
-			trailer_type: data.trailer_type,
-			truck_number: data.truck_number
+		collections.where('id_number', '==', data.clientId)
+		.get()
+		.then((querySnapshot)=>{
+			querySnapshot.forEach((doc)=>{
+				docId = doc.id
+			})
 		})
 		.then(()=>{
-			collections.get()
+			collections.doc(docId)
+			.update({
+				username: data.username,
+				password: data.password,
+				phone_number: data.phone_number
+			})
+		})
+		.then(()=>{
+			collections.doc(docId)
+			.get()
 			.then((doc)=>{
 				if(doc.exists){
 					dispatch({
-						type: UPDATE_PROFILE,
+						type: GET_USER_DATA,
 						payload: doc.data()	
 					})
 				}
@@ -66,7 +76,7 @@ function handleUpdateProfile(state, action){
 }
 
 const ACTION_HANDLERS = {
-  UPDATE_PROFILE:handleUpdateProfile
+	GET_USER_DATA:handleUpdateProfile
 }
 const initialState = {
   

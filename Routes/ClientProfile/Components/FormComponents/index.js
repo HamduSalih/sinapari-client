@@ -11,7 +11,7 @@ import styles from './FormComponentsStyles'
 
 export default class FormComponents extends React.Component{
     state={
-        driverId: this.props.userData.id_number
+        clientId: this.props.userData.id_number
     }
 
     _updateProfile = (data) => {
@@ -22,71 +22,24 @@ export default class FormComponents extends React.Component{
         return(
                 <ScrollView contentContainerStyle={styles.scrollView}>
                     <View style={styles.componentContainer}>
-                        <Text style={styles.label}>Phone Number</Text>
+                        <Text style={styles.label}>Username</Text>
                         <TextInput style={styles.inputs}
-                            onChangeText={(phone_number)=> this.setState({phone_number})}
+                            onChangeText={(username)=> this.setState({username})}
+                            autoCapitalize='none'
                         />
                     </View>
                     <View style={styles.componentContainer}>
-                        <Text style={styles.label}>Affiliation</Text>
-                        <View style={{borderColor:'grey', borderWidth: 1}}>
-                            <Picker
-                                selectedValue={this.state.affiliation}
-                                onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({affiliation: itemValue})
-                                }
-                            >
-                                <Picker.Item label="Select" value="Select" />
-                                <Picker.Item label="Independent" value="independent" />
-                                <Picker.Item label="Under Partner" value="under_partner" />
-                            </Picker>
-                        </View>
-                    </View>
-                    <View style={{
-                        paddingVertical: 20,
-                        flexDirection: 'row',
-                        justifyContent: 'space-around'
-                    }}>
-                        <View style={{
-                            width: '45%'
-                        }}>
-                            <Text style={styles.label}>Trailer Length</Text>
-                            <View style={{borderColor:'grey', borderWidth: 1}}>
-                                <Picker
-                                    selectedValue={this.state.trailer_length}
-                                    onValueChange={(itemValue, itemIndex) =>
-                                        this.setState({trailer_length: itemValue})
-                                    }
-                                >
-                                    <Picker.Item label="Select" value="Select" />
-                                    <Picker.Item label="20ft" value="20ft" />
-                                    <Picker.Item label="40ft" value="40ft" />
-                                </Picker>
-                            </View>
-                        </View>
-                        <View style={{
-                            width: '50%'
-                        }}>
-                            <Text style={styles.label}>Trailer Type</Text>
-                            <View style={{borderColor:'grey', borderWidth: 1}}>
-                                <Picker
-                                    selectedValue={this.state.trailer_type}
-                                    onValueChange={(itemValue, itemIndex) =>
-                                        this.setState({trailer_type: itemValue})
-                                    }
-                                >
-                                    <Picker.Item label="Select" value="Select" />
-                                    <Picker.Item label="Flatbed" value="flatbed" />
-                                    <Picker.Item label="Transit" value="transit" />
-                                    <Picker.Item label="Box-cargo" value="box-cargo" />
-                                </Picker>
-                            </View>
-                        </View>
+                        <Text style={styles.label}>Password</Text>
+                        <TextInput style={styles.inputs}
+                            onChangeText={(password)=> this.setState({password})}
+                            autoCapitalize='none'
+                            secureTextEntry
+                        />
                     </View>
                     <View style={styles.componentContainer}>
-                        <Text style={styles.label}>Truck Number</Text>
+                        <Text style={styles.label}>Phone Number</Text>
                         <TextInput style={styles.inputs}
-                            onChangeText={(truck_number)=> this.setState({truck_number})}
+                            onChangeText={(phone_number)=> this.setState({phone_number})}
                         />
                     </View>
                     <View style={{
