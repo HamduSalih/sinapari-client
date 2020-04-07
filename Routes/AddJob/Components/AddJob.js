@@ -4,6 +4,8 @@ import { Button } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import ScrollContainer from './ScrollContainer'
 import GooglePlacesInput from './ScrollContainer/GooglePlacesInput'
+import BottomTabContainer from '../../../Navigtions/BottomTabContainer'
+
 
 export default class AddJob extends Component{
     constructor(props) {
@@ -34,6 +36,7 @@ export default class AddJob extends Component{
                    selectedDropPoint={this.props.selectedDropPoint}
                    addJob={this.props.addJob}
                 />
+                <BottomTabContainer />
             </View>
         )
     }

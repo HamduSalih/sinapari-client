@@ -4,6 +4,7 @@ import { Container }  from "native-base";
 import { Actions } from 'react-native-router-flux';
 import Constants from 'expo-constants';
 import RenderJobs from './RenderJobs'
+import BottomTabContainer from '../../../Navigtions/BottomTabContainer'
 
 const sinaLogo = require("../../../assets/img/sinapari_blue.png");
 const truckMarker = require("../../../assets/img/truck_marker.png");
@@ -35,6 +36,7 @@ render(){
 						<RenderJobs
 							jobBids={this.props.jobBids}/>
 					}
+					<BottomTabContainer />
 				</View>
 			</Container>
 		);

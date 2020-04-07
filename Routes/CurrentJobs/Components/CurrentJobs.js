@@ -3,9 +3,9 @@ import {View, Dimensions, StyleSheet, ActivityIndicator} from "react-native";
 import { Container }  from "native-base";
 import { Actions } from 'react-native-router-flux';
 import MapContainer from "./MapContainer";
-import BottomTab from '../../../Navigtions/BottomTabContainer';
 import ScrollContainer from './ScrollContainer'
 import RenderJobs from './RenderJobs'
+import BottomTabContainer from '../../../Navigtions/BottomTabContainer'
 
 const {width, height} = Dimensions.get("window");
 const sinaLogo = require("../../../assets/img/sinapari_blue.png");
@@ -46,6 +46,7 @@ render(){
 						<RenderJobs
 							currentJobs={this.props.currentJobs}/>
 					}
+				<BottomTabContainer />
 			</View>
 		);
 
