@@ -63,31 +63,41 @@ export default class ScrollContainer extends Component{
 
         if(nextProps.selectedLoadAddress !== this.props.selectedLoadAddress){
             this.setState({
-                    pickUpAddress: nextProps.selectedLoadAddress.address,
-                    pickUpLat: nextProps.selectedLoadAddress.latitude,
-                    pickUpLong: nextProps.selectedLoadAddress.longitude
+                pickUpAddress: nextProps.selectedLoadAddress.address,
+                pickUpLat: nextProps.selectedLoadAddress.latitude,
+                pickUpLong: nextProps.selectedLoadAddress.longitude
             })
         }
     }
+
+    //convert input time to timestamp
+    _toTimestamp = (strDate, stateOption) => {
+        function toTimestamp(){
+            var datum = Date.parse(strDate);
+            return datum/1000;
+        }
+    
+        if(stateOption == 'pickUpTime'){
+            let loadTime = toTimestamp()
+            this.setState({
+                pickUpTime: loadTime,
+            })
+            console.log(this.state.pickUpTime)
+        }
+        if(stateOption == 'dropOffTime'){
+            let dropTime = toTimestamp()
+            this.setState({
+                dropOffTime: dropTime,
+            })
+            console.log(this.state.dropOffTime)
+        }
+    }
+
 
     //handles adding job to database
     _addJobEvent = (parameter) => {
         const loadBoolean = this.props.selectedLoadPoint //variable to receive load point boolean
         const dropBoolean = this.props.selectedDropPoint //variable to receive drop point boolean
-        
-        //convert time to timestamp
-        function toTimestamp(strDate){
-            var datum = Date.parse(strDate);
-            return datum/1000;
-         }
-        
-        let loadTime = toTimestamp(this.state.pickUpTime)
-        let dropTime = toTimestamp(this.state.dropOffTime)
-   
-        this.setState({
-            pickUpTime: loadTime,
-            dropOffTime: dropTime
-        })
 
 
         //error handling to check if fields are not empty
@@ -172,13 +182,13 @@ export default class ScrollContainer extends Component{
                     <TextInput
                         style={styles.textInput}
                         placeholder='mm/dd/yyyy hh:mm'
-                        onChangeText={(pickUpTime)=> this.setState({pickUpTime})}
+                        onChangeText={(pickUpTime) => this._toTimestamp(pickUpTime, 'pickUpTime')}
                     />
                     <Text style={styles.labels}>Drop-Off Time</Text>
                     <TextInput
                         style={styles.textInput}
                         placeholder='mm/dd/yyyy hh:mm'
-                        onChangeText={(dropOffTime)=> this.setState({dropOffTime})}
+                        onChangeText={(dropOffTime) => this._toTimestamp(dropOffTime, 'dropOffTime')}
                     />
                 </View>
                 <View style={styles.buttonContainer}>

@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import MapContainer from "./MapContainer";
 import ScrollContainer from './ScrollContainer'
 import BottomTabContainer from '../../../Navigtions/BottomTabContainer'
+import CallButton from './CallButton'
 
 
 const sinaLogo = require("../../../assets/img/sinapari_blue.png");
@@ -38,7 +39,8 @@ render(){
 				{
 					this.props.region &&
 					<MapContainer 
-						region={this.props.region}							
+						region={this.props.region}
+						bidDetails={this.props.bidDetails}							
 					/>
 				}
 
@@ -46,6 +48,7 @@ render(){
 					bidDetails={this.props.bidDetails}
 					updateBidTripStatus={this.props.updateBidTripStatus}
 				/>
+				<CallButton />
 				<BottomTabContainer />
 			</View>
 		);

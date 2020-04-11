@@ -42,8 +42,8 @@ const {
 
 const {width, height} = Dimensions.get("window");
 let ASPECT_RATIO = width / height;
-const LATITUDE_DELTA = 0.05;
-const LONGITUDE_DELTA = 0.05; 
+const LATITUDE_DELTA = 0.005;
+const LONGITUDE_DELTA = 0.005; 
 //---------------
 //Actions
 //---------------

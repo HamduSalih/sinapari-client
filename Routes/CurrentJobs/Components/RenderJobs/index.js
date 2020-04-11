@@ -45,11 +45,7 @@ const RenderJobs = ({currentJobs}) => {
   
     return(
       <SafeAreaView style={styles.container}>
-        <View style={{paddingTop:10, paddingHorizontal:15}}>
-          <Text style={styles.headerText}>
-            Jobs Posted
-          </Text>
-        </View>
+        
         <FlatList 
           data={DATA}
           renderItem={({item})=>

@@ -6,7 +6,7 @@ import {
     TouchableOpacity,
     Picker,
     ScrollView } from 'react-native'
-
+import { Actions } from 'react-native-router-flux'
 import styles from './FormComponentsStyles'
 
 export default class FormComponents extends React.Component{
@@ -52,7 +52,9 @@ export default class FormComponents extends React.Component{
                         >
                             <Text style={styles.buttonText}>Save</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button}
+                            onPress={()=>Actions.pop()}
+                        >
                             <Text style={styles.buttonText}>Cancel</Text>
                         </TouchableOpacity>
                     </View>

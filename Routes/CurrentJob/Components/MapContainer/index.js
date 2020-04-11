@@ -8,19 +8,20 @@ const markerImage = require('../../../../assets/img/marker.png')
 
 export const MapContainer = ({
 		region,
+		bidDetails
 	})=>{
 		
 
 		const origin = {
-			latitude: 5.6604616,
-			longitude: -0.0077599,
+			latitude: bidDetails.pickUpAddress.lat,
+			longitude: bidDetails.pickUpAddress.long,
 			latitudeDelta: 0.9,
 		 	longitudeDelta: 0.9};
 		const destination = {
-			latitude: 5.6060955, 
-			longitude: -0.1681235,
-			latitudeDelta: 0.045,
-			longitudeDelta: 0.045};
+			latitude: bidDetails.dropOffAddress.lat,
+			longitude: bidDetails.dropOffAddress.long,
+			latitudeDelta: 0.9,
+			longitudeDelta: 0.9};
 			 
 		const pickUpOrigin = region
 		const pickUpDestination = origin
@@ -33,6 +34,13 @@ export const MapContainer = ({
 				style={styles.map}
 				region={region}
 			>
+				<MapViewDirections 
+						origin={origin}
+						destination={destination}
+						apikey={GOOGLE_MAPS_APIKEY}
+						strokeWidth={3}
+						strokeColor={'green'}
+				/>
 				<MapView.Marker
 					coordinate={{latitude:region.latitude, longitude:region.longitude}}
 					image={markerImage}

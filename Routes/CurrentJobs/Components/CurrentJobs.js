@@ -33,21 +33,23 @@ class CurrentJobs extends React.Component{
 
 render(){
 		return(
-			<View style={{flex:1}}>
-				{
-					!this.props.currentJobs &&
-					<ActivityIndicator
-						size="large" 
-						color='#141d48'
-						style={styles.activityIndicator}/>
-				}
-				{
-						this.props.currentJobs &&
-						<RenderJobs
-							currentJobs={this.props.currentJobs}/>
+			<Container>
+				<View style={{flex:1}}>
+					{
+						!this.props.currentJobs &&
+						<ActivityIndicator
+							size="large" 
+							color='#141d48'
+							style={styles.activityIndicator}/>
 					}
-				<BottomTabContainer />
-			</View>
+					{
+							this.props.currentJobs &&
+							<RenderJobs
+								currentJobs={this.props.currentJobs}/>
+						}
+					<BottomTabContainer />
+				</View>
+			</Container>
 		);
 
 	}
