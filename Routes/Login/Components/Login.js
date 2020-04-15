@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, AsyncStorage, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, AsyncStorage, Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { Button } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import * as firebase from 'firebase';
@@ -54,11 +54,9 @@ export default class Login extends Component{
 
     render(){
         return(
-            <View style={{
-                flex:1,
-                justifyContent: 'center',
-                padding: 20
-            }}>
+            <KeyboardAvoidingView
+                behavior="padding" 
+                    style={styles.container}>
                 <View style={styles.formContainer}>
                     <Text style={styles.labels}>Username</Text>
                     <TextInput
@@ -89,17 +87,22 @@ export default class Login extends Component{
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     labels:{
         fontSize: 25,
         marginBottom: 10
     },
     formContainer:{
+        flex: 1,
+        justifyContent: 'center',
         borderColor: '#141d48',
         borderWidth: 1,
         padding: 15,

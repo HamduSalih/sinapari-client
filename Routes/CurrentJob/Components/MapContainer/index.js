@@ -13,13 +13,13 @@ export const MapContainer = ({
 		
 
 		const origin = {
-			latitude: bidDetails.pickUpAddress.lat,
-			longitude: bidDetails.pickUpAddress.long,
+			latitude: bidDetails[0].pickUpAddress.lat,
+			longitude: bidDetails[0].pickUpAddress.long,
 			latitudeDelta: 0.9,
 		 	longitudeDelta: 0.9};
 		const destination = {
-			latitude: bidDetails.dropOffAddress.lat,
-			longitude: bidDetails.dropOffAddress.long,
+			latitude: bidDetails[0].dropOffAddress.lat,
+			longitude: bidDetails[0].dropOffAddress.long,
 			latitudeDelta: 0.9,
 			longitudeDelta: 0.9};
 			 
@@ -33,13 +33,14 @@ export const MapContainer = ({
 				provider={MapView.PROVIDER_GOOGLE}
 				style={styles.map}
 				region={region}
+				showsTraffic={true}
 			>
 				<MapViewDirections 
-						origin={origin}
-						destination={destination}
-						apikey={GOOGLE_MAPS_APIKEY}
-						strokeWidth={3}
-						strokeColor={'green'}
+					origin={origin}
+					destination={destination}
+					apikey={GOOGLE_MAPS_APIKEY}
+					strokeWidth={3}
+					strokeColor={'#141d48'}
 				/>
 				<MapView.Marker
 					coordinate={{latitude:region.latitude, longitude:region.longitude}}

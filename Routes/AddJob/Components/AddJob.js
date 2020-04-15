@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, ScrollView, Text, KeyboardAvoidingView, StyleSheet, TouchableOpacity } from 'react-native'
 import { Button } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import ScrollContainer from './ScrollContainer'
@@ -21,10 +21,9 @@ export default class AddJob extends Component{
 
     render(){
         return(
-            <View style={{
-                flex:1,
-                justifyContent: 'center'
-            }}>
+            <KeyboardAvoidingView
+                behavior="padding" 
+                style={styles.container}>
                 <ScrollContainer
                    getInputType={this.props.getInputType}
                    getSelectedAddress={this.props.getSelectedAddress}
@@ -37,7 +36,7 @@ export default class AddJob extends Component{
                    addJob={this.props.addJob}
                 />
                 <BottomTabContainer />
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }

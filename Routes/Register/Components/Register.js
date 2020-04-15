@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, ScrollView, Text, KeyboardAvoidingView, StyleSheet, TouchableOpacity } from 'react-native'
 import { Button } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import ScrollContainer from './ScrollContainer'
@@ -19,14 +19,13 @@ export default class Register extends Component{
 
     render(){
         return(
-            <View style={{
-                flex:1,
-                justifyContent: 'center'
-            }}>
+            <KeyboardAvoidingView
+                behavior="padding" 
+                style={styles.container}>
                 <ScrollContainer 
                     userInfo={this.state}
                 />
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }

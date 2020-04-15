@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, 
-        Text, 
+        KeyboardAvoidingView, 
         View, } from 'react-native';
 import Constants from 'expo-constants';
 import FormComponents from './FormComponents'
@@ -30,15 +30,15 @@ export default class ClientProfile extends Component{
 
     render(){
         return(
-            <View
-                style={styles.container}
-            >
+            <KeyboardAvoidingView
+                behavior="padding" 
+                style={styles.container}>
                 <FormComponents 
                     userData={this.props.userData}
                     updateProfile={this.props.updateProfile}
                 />
                 <BottomTab />
-            </View>
+            </KeyboardAvoidingView>
 
         )
     }
