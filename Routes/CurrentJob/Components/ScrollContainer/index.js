@@ -79,7 +79,7 @@ class ScrollContainer extends Component{
                         </View>
                     </View>
                     <View style={styles.standAloneViews}>
-                        <Text>Job Id: {bidDetails.jobId}</Text>
+                        <Text>Driver Number: {bidDetails.phone_number}</Text>
                     </View>
 
                     <View style={styles.standAloneViews, {alignItems: 'center', marginTop: 40}}>

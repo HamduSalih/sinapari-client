@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, YellowBox} from "react-native";
+import {View, Text, Linking} from "react-native";
 import { Container }  from "native-base";
 import { Actions } from 'react-native-router-flux';
 import MapContainer from "./MapContainer";
@@ -35,22 +35,26 @@ class CurrentJob extends React.Component{
 
 render(){
 		return(
-			<View style={{flex:1}}>
-				{
-					this.props.region &&
-					<MapContainer 
-						region={this.props.region}
-						bidDetails={this.props.bidDetails}							
+			<Container>
+				<View style={{flex:1}}>
+					{
+						this.props.region &&
+						<MapContainer 
+							region={this.props.region}
+							bidDetails={this.props.bidDetails}							
+						/>
+					}
+					
+					<ScrollContainer 
+						bidDetails={this.props.bidDetails}
+						updateBidTripStatus={this.props.updateBidTripStatus}
 					/>
-				}
-
-				<ScrollContainer 
-					bidDetails={this.props.bidDetails}
-					updateBidTripStatus={this.props.updateBidTripStatus}
-				/>
-				<CallButton />
-				<BottomTabContainer />
-			</View>
+					<CallButton 
+						bidDetails={this.props.bidDetails}
+						/>
+					<BottomTabContainer />
+				</View>
+			</Container>
 		);
 
 	}
