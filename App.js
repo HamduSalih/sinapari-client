@@ -5,7 +5,7 @@ import {
   View
 } from 'react-native';
 import Root from './main'
-export default class sinapariClient extends Component {
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('sinapariClient', () => sinapariClient);
+AppRegistry.registerComponent('sinapari-client', () => App);

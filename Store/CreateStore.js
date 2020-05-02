@@ -5,8 +5,6 @@ import { createLogger } from "redux-logger";
 import Constants from "expo-constants";
 const { manifest } = Constants;
 
-const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
-
 const log =  createLogger({ diff: true, collapsed: true });
 
 // a function which can create our store and auto-persist the data

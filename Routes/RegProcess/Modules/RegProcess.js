@@ -22,11 +22,6 @@ const firebaseConfig = {
 
 const database = firebase.firestore();
 
-
-const { manifest } = Constants;
-
-const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
-
 //--------------------
 //Constants
 //--------------------

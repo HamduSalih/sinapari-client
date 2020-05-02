@@ -46,11 +46,9 @@ render(){
 			}
 				source={sinabg}
 			>
-				<Image 
-                    source={sinalogo}
-                    resizeMode='center'
-                    style={{padding:0,marginVertical:-45}} />
-                <Text style={{color:'#eef0ef', padding:0}}>The Future of Logistics Transportation</Text>
+				<Text
+                        style={{color:'#eef0ef', padding:0, fontSize: 40}}>SinaPari</Text>
+                    <Text style={{color:'#eef0ef', padding:0, fontSize: 10}}>The Future of Logistics Transportation</Text>
 			</ImageBackground>
 		);
 

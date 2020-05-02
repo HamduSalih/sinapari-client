@@ -18,6 +18,7 @@ export default class ScrollContainer extends Component{
         accessories: null,
         client: this.props.userData.client,
         clientId: this.props.userData.id_number,
+        client_number: this.props.userData.phone_number,
         distanceMatrix: null,
             dropOffTime: null,
             dropOffAddress: null,

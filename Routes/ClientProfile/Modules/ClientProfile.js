@@ -8,10 +8,7 @@ import request from '../../../util/Request';
 import * as firebase from 'firebase';
 import '@firebase/firestore';
 import Constants from "expo-constants";
-
-const { manifest } = Constants;
 const database = firebase.firestore();
-const uri = `http://${manifest.debuggerHost.split(':').shift()}:3000`;
 
 //--------------------
 //Constants
