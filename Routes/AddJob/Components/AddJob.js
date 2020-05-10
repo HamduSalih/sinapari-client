@@ -21,8 +21,7 @@ export default class AddJob extends Component{
 
     render(){
         return(
-            <KeyboardAvoidingView
-                behavior="padding" 
+            <KeyboardAvoidingView 
                 style={styles.container}>
                 <ScrollContainer
                    getInputType={this.props.getInputType}

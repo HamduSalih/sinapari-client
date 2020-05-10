@@ -20,7 +20,6 @@ export default class Register extends Component{
     render(){
         return(
             <KeyboardAvoidingView
-                behavior="padding" 
                 style={styles.container}>
                 <ScrollContainer 
                     userInfo={this.state}

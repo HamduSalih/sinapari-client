@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { View, AsyncStorage, Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { View, AsyncStorage, Text, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Dimensions, Image } from 'react-native'
 import { Button } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import * as firebase from 'firebase';
 import '@firebase/firestore';
 
+const {width, height} = Dimensions.get('window')
+
 const database = firebase.firestore();
+
+const logo = require('../../../assets/img/sinalogo.jpg')
 
 export default class Login extends Component{
 
@@ -54,10 +58,18 @@ export default class Login extends Component{
 
     render(){
         return(
-            <KeyboardAvoidingView
-                behavior="padding" 
+            <KeyboardAvoidingView 
                     style={styles.container}>
                 <View style={styles.formContainer}>
+                    <Image 
+                        source={logo}
+                        style={{
+                            width: width * 0.3,
+                            height: height * 0.3,
+                            resizeMode: 'contain',
+                            marginBottom: -(height * 0.05)
+                        }}
+                    />
                     <Text style={styles.labels}>Username</Text>
                     <TextInput
                         placeholder='Input your username'
@@ -102,21 +114,16 @@ const styles = StyleSheet.create({
     },
     formContainer:{
         flex: 1,
-        justifyContent: 'center',
-        borderColor: '#141d48',
-        borderWidth: 1,
         padding: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 1, height: 2 },
-        shadowOpacity: 0.8,
-        elevation: 1
+        alignItems: 'center'
     },
     textInput:{
         borderColor: '#141d48',
         borderWidth: 1,
         padding: 10,
         borderRadius: 5,
-        marginBottom: 20
+        marginBottom: 20,
+        width: '100%'
     },
     userButton: {
         backgroundColor: '#141d48',

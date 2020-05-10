@@ -31,7 +31,6 @@ export default class ClientProfile extends Component{
     render(){
         return(
             <KeyboardAvoidingView
-                behavior="padding" 
                 style={styles.container}>
                 <FormComponents 
                     userData={this.props.userData}
