@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
     formContainer:{
         flex: 1,
         padding: 15,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     textInput:{
         borderColor: '#141d48',

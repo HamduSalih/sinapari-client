@@ -89,7 +89,7 @@ export function getAllJobs(idnumber){
 	var jobsCollection = database.collection('jobs');
 	var allJobs = [];
 	return(dispatch) => {
-		jobsCollection.where('clientId', '==', idnumber)
+		jobsCollection.where('client_number', '==', idnumber)
 		.get()
 		.then(function(querySnapshot) {
 			querySnapshot.forEach(function(doc) {

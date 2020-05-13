@@ -47,7 +47,7 @@ const RenderJobs = ({jobBids}) => {
       <SafeAreaView style={styles.container}>
         <View style={{paddingTop:10, paddingHorizontal:15}}>
           <Text style={styles.headerText}>
-            Jobs Posted
+            Bids Made
           </Text>
         </View>
         <FlatList 

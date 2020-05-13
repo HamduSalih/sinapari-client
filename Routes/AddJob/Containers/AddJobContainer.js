@@ -7,6 +7,7 @@ import {
 } from "../Modules/AddJob";
 //states from modules home.js
 const mapStateToProps = (state) => ({
+    userData: state.authLoad.userData,
     resultTypes: state.addJob.resultTypes || {},
     selectedLoadAddress: state.addJob.selectedLoadAddress || {},
     selectedDropAddress: state.addJob.selectedDropAddress || {},

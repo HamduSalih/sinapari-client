@@ -29,8 +29,9 @@ class AuthloadScreen extends React.Component{
         if(userToken !== '1'){
             Actions.login();
         } else{
-			this.props.getUserData(driverLicense),
-			this.props.getAllJobs(driverLicense),
+			//alert(driverLicense)
+			await this.props.getUserData(driverLicense),
+			await this.props.getAllJobs(driverLicense),
             Actions.home();
         }
     }
