@@ -38,8 +38,8 @@ const {
 
 const {width, height} = Dimensions.get("window");
 let ASPECT_RATIO = width / height;
-const LATITUDE_DELTA = 0.09;
-const LONGITUDE_DELTA = 0.09; 
+const LATITUDE_DELTA = 0.035;
+const LONGITUDE_DELTA = 0.035; 
 //---------------
 //Actions
 //---------------
@@ -69,6 +69,7 @@ export function getDriverLocation(bidDetails){
 export function updateBidTripStatus(bid, buttonText){
 	var collections = database.collection('bids');
 	var driverJobsInfoCollection = database.collection('jobsInfo')
+	var jobsCollection = database.collection('jobs')
 	var docId = '';
 	var jobsInfoDocId = '';
 	var jobBids = [];
@@ -183,6 +184,15 @@ export function updateBidTripStatus(bid, buttonText){
 								jobsCompleted: completedJobs
 							})
 						}
+					})
+				})
+			})
+			.then(()=>{
+				jobsCollection.where('jobId', '==', bid.jobId)
+				.get()
+				.then((querySnapshot)=>{
+					querySnapshot.forEach((doc)=>{
+						collections.doc(doc.id).delete()
 					})
 				})
 			})

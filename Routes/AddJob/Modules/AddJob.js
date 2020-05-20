@@ -94,7 +94,7 @@ export function addJob(jobDetails){
   const receivedData = {
     accessories: null,
         client: jobDetails.client,
-        clientId: jobDetails.clientId,
+        client_number: jobDetails.client_number,
         distance: jobDetails.distanceMatrix.rows[0].elements[0].distance.text,
         pickUp:{
           time: jobDetails.pickUpTime,
@@ -121,7 +121,7 @@ export function addJob(jobDetails){
     collections.add(receivedData)
     .then(()=>{
       collections.where('client', '==', jobDetails.client)
-      .where('clientId', '==', jobDetails.clientId)
+      .where('client_number', '==', jobDetails.client_number)
       .get()
       .then((querySnapshot)=>{
         querySnapshot.forEach((doc)=>{
