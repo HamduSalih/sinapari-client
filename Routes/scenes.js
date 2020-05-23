@@ -11,6 +11,7 @@ import JobBidsContainer from './JobBids/Containers/JobBidsContainer'
 import CurrentJobContainer from './CurrentJob/Containers/CurrentJobContainer'
 import CurrentJobsContainer from './CurrentJobs/Containers/CurrentJobsContainer'
 import ClientProfileContainer from './ClientProfile/Containers/ClientProfileContainer'
+import ReportContainer from './Report/Containers/ReportContainer'
 
 const scenes = Actions.create(
 	<Scene key="root">
@@ -24,6 +25,7 @@ const scenes = Actions.create(
 		<Scene key="currentJob" component={CurrentJobContainer} title="Current Job" />
 		<Scene key="currentJobs" component={CurrentJobsContainer} title="Current Jobs" />
 		<Scene key="clientProfile" component={ClientProfileContainer} title="Profile" />
+		<Scene key="report" component={ReportContainer} title="Send Report" />
 	</Scene>
 
 );
