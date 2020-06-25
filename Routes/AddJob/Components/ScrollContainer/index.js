@@ -20,16 +20,17 @@ export default class ScrollContainer extends Component{
         client_number: this.props.userData.id_number,
         phone_number: this.props.userData.phone_number,
         distanceMatrix: null,
-            dropOffTime: null,
-            dropOffAddress: null,
-            dropOffLat: null,
-            dropOffLong: null,      
+        dropOffTime: null,
+        dropOffAddress: null,
+        dropOffLat: null,
+        dropOffLong: null,      
         goodsDescription: null,
         jobId: null,
-            pickUpTime: null,
-            pickUpAddress: null,
-            pickUpLat: null,
-            pickUpLong: null,
+        number_of_trucks: '1',
+        pickUpTime: null,
+        pickUpAddress: null,
+        pickUpLat: null,
+        pickUpLong: null,
         status: 'not live',
         trailerType: null,
         vehicleType: null,
@@ -161,6 +162,13 @@ export default class ScrollContainer extends Component{
                         style={styles.textInput}
                         placeholder='Describe goods'
                         onChangeText={(goodsDescription)=> this.setState({goodsDescription})}
+                    />
+
+                    <Text style={styles.labels}>Number of Trucks</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='How many trucks'
+                        onChangeText={(number_of_trucks)=> this.setState({number_of_trucks})}
                     />
                 </View>
 
