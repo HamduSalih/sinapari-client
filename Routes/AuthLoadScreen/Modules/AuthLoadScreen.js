@@ -87,17 +87,15 @@ export function getUserData(userId){
 
 export function getAllJobs(idnumber){
 	var jobsCollection = database.collection('jobs');
-	var allJobs = [];
+	;
 	return(dispatch) => {
 		jobsCollection.where('client_number', '==', idnumber)
-		.get()
-		.then(function(querySnapshot) {
+		.onSnapshot(function(querySnapshot) {
+			var allJobs = []
 			querySnapshot.forEach(function(doc) {
 				// doc.data() is never undefined for query doc snapshots
 				allJobs.push(doc.data());
 			});
-		})
-		.then(()=>{
 			dispatch({
 				type:GET_USER_JOBS,
 				payload: allJobs	

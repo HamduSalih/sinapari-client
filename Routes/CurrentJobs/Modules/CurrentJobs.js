@@ -44,18 +44,15 @@ const LONGITUDE_DELTA = 0.035;
 //---------------
 export function getCurrentJobs(userData){
 	var bidsCollection = database.collection('bids')
-	var currentJobs = []
 
 	return (dispatch)=>{
 		bidsCollection.where('status', '==', 'accepted')
 		.where('client', '==', userData.client)
-		.get()
-		.then((querySnapshot)=>{
+		.onSnapshot((querySnapshot)=>{
+			var currentJobs = []
 			querySnapshot.forEach((doc)=>{
 				currentJobs.push(doc.data())
 			})
-		})
-		.then(()=>{
 			dispatch({
 				type: GET_CURRENT_JOBS,
 				payload: currentJobs

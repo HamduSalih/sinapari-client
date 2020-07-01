@@ -32,17 +32,15 @@ const LONGITUDE_DELTA = 0.035;
 //---------------
 export function getJobBids(jobId){
 	var collections = database.collection('bids');
-	var jobBids = []
+	
 
 	return(dispatch)=>{
 		collections.where('jobId', '==', jobId)
-		.get()
-		.then((querySnapshot)=>{
+		.onSnapshot((querySnapshot)=>{
+			var jobBids = []
 			querySnapshot.forEach((doc)=>{
 				jobBids.push(doc.data())
 			})
-		})
-		.then(()=>{
 			dispatch({
 				type:GET_JOB_BIDS,
 				payload: jobBids

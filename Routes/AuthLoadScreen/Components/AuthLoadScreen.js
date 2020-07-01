@@ -4,7 +4,10 @@ import { Container }  from "native-base";
 import { Actions } from 'react-native-router-flux';
 import Constants from 'expo-constants';
 import BottomTab from '../../../Navigtions/BottomTabContainer';
+import * as firebase from 'firebase';
+import '@firebase/firestore';
 
+const database = firebase.firestore()
 const sinalogo = require('../../../assets/img/sinalogo.jpg')
 const sinabg = require('../../../assets/img/sina-bg.jpg')
 
@@ -17,10 +20,24 @@ class AuthloadScreen extends React.Component{
 	}
 
 	componentDidMount(){
+		var version = "1.0.0"
+		var versionControl = database.collection('versionControl').doc('versionControl')
+		versionControl
+		.get()
+		.then((doc)=>{
+			if((doc.data()).version == version){
+				setTimeout(() => {
+					this._bootstrapAsync();
+				}, 5000);
+			}else{
+				if(alert('Please close app and update to the latest version')){
 
-		setTimeout(() => {
-			this._bootstrapAsync();
-		}, 5000);
+				}
+			}
+		})
+		.catch((error)=>{
+			console.log(error)
+		})		
   	}
 
 	_bootstrapAsync = async () => {
